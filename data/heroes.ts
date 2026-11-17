@@ -30,16 +30,16 @@ export interface HeroImage {
 export const heroCaption = "Representative image from the developer’s catalogue";
 
 export const heroes: Record<HeroKey, HeroImage> = {
-  home: { src: `${IMG}/hero/connect-with-nature-cabin.webp`, alt: "A timber lodge glowing at dusk among tall trees", position: "50% 55%", width: 2247, representative: true, overlay: 0.62 },
+  home: { src: `${IMG}/clubhouse/pool-pavilion.webp`, alt: "A pool in front of a tiled-roof pavilion surrounded by palms", position: "50% 62%", width: 1509, representative: true, overlay: 0.62 },
   about: { src: `${IMG}/hero/mood-farmstead.webp`, alt: "A red barn and silo among trees under a blue sky", position: "50% 70%", width: 2231, representative: true, overlay: 0.66 },
-  properties: { src: `${IMG}/clubhouse/pool-pavilion.webp`, alt: "A pool in front of a tiled-roof pavilion surrounded by palms", position: "50% 60%", width: 1509, representative: true, overlay: 0.66 },
+  properties: { src: `${IMG}/hero/connect-with-nature-cabin.webp`, alt: "A timber lodge glowing at dusk among tall trees", position: "50% 55%", width: 2247, representative: true, overlay: 0.66 },
   residential: { src: `${IMG}/hero/connect-with-nature-cabin.webp`, alt: "A timber home glowing warmly at dusk among tall trees", position: "78% 50%", width: 2247, representative: true, overlay: 0.7 },
   commercial: { src: `${IMG}/clubhouse/dine-in.webp`, alt: "A plant-filled restaurant interior with teal and yellow chairs", position: "50% 45%", width: 807, representative: true, overlay: 0.78 },
   industrial: { src: `${IMG}/features/solar-power.webp`, alt: "Solar panels against a bright sky over a green field", position: "50% 40%", width: 880, representative: true, overlay: 0.78 },
   "farm-houses": { src: `${IMG}/hero/cover-farmland.webp`, alt: "A lone tree and red farm buildings on rolling green farmland", position: "50% 65%", width: 2029, representative: true, overlay: 0.64 },
   gallery: { src: `${IMG}/features/flowering-streets.webp`, alt: "A dirt lane lined with red flowering shrubs and tall trees", position: "50% 55%", width: 945, representative: true, overlay: 0.76 },
   sell: { src: `${IMG}/features/orchard-lanes.webp`, alt: "An orchard lane with ripe fruit hanging from the trees", position: "50% 45%", width: 958, representative: true, overlay: 0.78 },
-  "buy-invest": { src: `${IMG}/clubhouse/pool-pavilion.webp`, alt: "A pool in front of a tiled-roof pavilion surrounded by palms", position: "30% 70%", width: 1509, representative: true, overlay: 0.7 },
+  "buy-invest": { src: `${IMG}/hero/mood-farmstead.webp`, alt: "A red barn and silo among trees under a blue sky", position: "20% 60%", width: 2231, representative: true, overlay: 0.7 },
   contact: { src: `${IMG}/hero/cover-farmland.webp`, alt: "A lone tree and red farm buildings on rolling green farmland", position: "30% 60%", width: 2029, representative: true, overlay: 0.7 },
 };
 

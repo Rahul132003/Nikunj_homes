@@ -10,8 +10,8 @@ const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
 /**
  * Home hero. No Nikunj Homes photography has been supplied, so the cinematic
- * effect is built from light, depth and hairlines. Drop a real image path into
- * `company.heroImage` and it layers in beneath the gradient automatically.
+ * effect is built from light, depth and hairlines over a stand-in photograph
+ * (data/heroes.ts). A real photo in `company.heroImage` takes over automatically.
  */
 export function HomeHero() {
   return (
@@ -27,17 +27,10 @@ export function HomeHero() {
         className="-z-30 object-cover"
         style={{ objectPosition: heroes.home.position }}
       />
-      <div aria-hidden className="absolute inset-0 -z-20" style={{ background: "linear-gradient(90deg, rgb(10 31 22 / 0.9) 0%, rgb(10 31 22 / 0.68) 48%, rgb(10 31 22 / 0.35) 100%)" }} />
-      <div aria-hidden className="absolute inset-0 -z-20 bg-[radial-gradient(120%_80%_at_85%_10%,#1f4a36_0%,transparent_55%),radial-gradient(90%_70%_at_0%_100%,#163828_0%,transparent_60%)] opacity-50 mix-blend-multiply" />
+      <div aria-hidden className="absolute inset-0 -z-20" style={{ background: "linear-gradient(90deg, color-mix(in srgb, var(--color-forest-950) 90%, transparent) 0%, color-mix(in srgb, var(--color-forest-950) 68%, transparent) 48%, color-mix(in srgb, var(--color-forest-950) 35%, transparent) 100%)" }} />
+      <div aria-hidden className="absolute inset-0 -z-20 bg-[radial-gradient(120%_80%_at_85%_10%,var(--color-forest-700)_0%,transparent_55%),radial-gradient(90%_70%_at_0%_100%,var(--color-forest-800)_0%,transparent_60%)] opacity-50 mix-blend-multiply" />
       <div aria-hidden className="anim-drift absolute -left-[15%] top-[8%] -z-10 h-[75vmin] w-[75vmin] rounded-full bg-forest-600/25 blur-[110px]" />
       <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-forest-950/80 via-transparent to-forest-950/30" />
-
-      {/* vertical hairlines — drawn in once */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 hidden lg:block">
-        {["25%", "50%", "75%"].map((left, i) => (
-          <span key={left} className="anim-line-y absolute top-0 h-full w-px bg-gold-500/20" style={{ left, ...d(500 + i * 220) }} />
-        ))}
-      </div>
 
       <div className="container-x relative flex flex-1 flex-col justify-center pb-10 pt-[calc(var(--header-h)+3rem)]">
         <div className="anim-rise" style={d(150)}>

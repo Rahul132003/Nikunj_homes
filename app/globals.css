@@ -3,35 +3,35 @@
 /* ==========================================================================
    NIKUNJ HOMES — DESIGN TOKENS
    Every pairing used in the UI is contrast-checked (WCAG 2.2 AA). Ratios noted.
-   Gold (#C8A96A) is for rules, icons and LARGE text on forest only — never body
-   text on ivory (2.0:1). Use --color-bronze for small labels on light surfaces.
+   Champagne gold (#C8A96A) is for rules, icons and LARGE text on navy only — never body
+   text on ivory (2.1:1). Use --color-bronze for small labels on light surfaces.
    ========================================================================== */
 
 @theme {
   /* Forest — primary */
-  --color-forest-950: #0a1f16;
-  --color-forest-900: #0f2a1f; /* 13.8:1 on ivory */
-  --color-forest-800: #163828; /* ivory on it 11.6:1 */
-  --color-forest-700: #1f4a36; /* 9.1:1 on ivory */
-  --color-forest-600: #2b6048;
+  --color-forest-950: #0b1120; /* deepest navy — overlays */
+  --color-forest-900: #131b2e; /* primary dark: 15.8:1 with ivory; headings on ivory */
+  --color-forest-800: #1b2540; /* raised dark surface */
+  --color-forest-700: #2a3556; /* hover / secondary dark: ivory on it 11.1:1 */
+  --color-forest-600: #3f4a6b;
 
   /* Champagne gold — accent */
   --color-gold-300: #e3d1a4;
-  --color-gold-400: #d6bd88;
-  --color-gold-500: #c8a96a; /* 6.8:1 on forest-900 · 2.0:1 on ivory */
-  --color-bronze: #7a5e24; /* gold's text-safe twin: 5.5:1 on ivory */
+  --color-gold-400: #d6bd88; /* champagne — small labels on dark: 9.4:1 */
+  --color-gold-500: #c8a96a; /* champagne — rules, icons, large text on dark: 7.6:1; NOT for text on ivory (2.1:1) */
+  --color-bronze: #7a5e24; /* champagne text-safe twin: 5.6:1 on ivory */
 
   /* Neutrals */
-  --color-ivory: #f7f3ea;
-  --color-ivory-200: #efe8d8;
-  --color-ivory-300: #e4dcc8;
+  --color-ivory: #f8f5ef;
+  --color-ivory-200: #efeae0;
+  --color-ivory-300: #e3dccd;
   --color-white: #ffffff;
-  --color-charcoal: #1e2322; /* 14.4:1 on ivory */
-  --color-muted: #55605a; /* 5.9:1 on ivory */
-  --color-sage: #b9c4bc; /* 8.5:1 on forest-900 */
-  --color-field-border: #857f6c; /* 3.6:1 on ivory — UI component contrast */
-  --color-hairline: #d9d1bc; /* decorative only */
-  --color-error: #a3271c; /* 6.6:1 on ivory */
+  --color-charcoal: #151a2b; /* 15.9:1 on ivory */
+  --color-muted: #535768; /* 6.6:1 on ivory */
+  --color-sage: #b8c0d4; /* secondary text on dark: 9.4:1 */
+  --color-field-border: #7d7f90; /* 3.9:1 on white — UI component contrast */
+  --color-hairline: #dcd5c4; /* decorative only */
+  --color-error: #a3271c; /* 6.7:1 on ivory */
 
   /* PGS GREENS accents — sampled from the catalogue. PGS page only. */
   --color-pgs-olive: #728513; /* white on it 4.1:1 → large text only */
@@ -41,8 +41,8 @@
   --color-pgs-wash: #e4e897; /* catalogue lime wash; forest-900 on it 11.9:1 */
 
   /* Type */
-  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
-  --font-sans: var(--font-manrope), "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-playfair), "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), "Inter", "Open Sans", Roboto, Lato, system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
   --breakpoint-xs: 30rem;
@@ -106,7 +106,7 @@ body {
   background: var(--color-ivory);
   color: var(--color-charcoal);
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: 1.0625rem; /* 17px — within the 16–18px readable range */
   line-height: 1.7;
   font-feature-settings: "kern", "liga";
   text-rendering: optimizeLegibility;
@@ -126,53 +126,53 @@ body {
 img { -webkit-user-drag: none; }
 
 /* ==========================================================================
-   Type scale — fluid. Display serif is only used at ≥ 28px (thin strokes).
+   Type scale — fluid. Playfair Display (serif) for headings, Inter for body/labels; body 17px.
    ========================================================================== */
 
 @utility text-display {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(3rem, 1.2rem + 6.4vw, 6.75rem);
-  line-height: 1;
-  letter-spacing: -0.015em;
+  font-size: clamp(2.5rem, 1.2rem + 5.4vw, 5.5rem);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
 }
 @utility text-h1 {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(2.5rem, 1.4rem + 3.9vw, 4.75rem);
-  line-height: 1.04;
-  letter-spacing: -0.012em;
+  font-size: clamp(2.25rem, 1.4rem + 3.3vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: -0.018em;
 }
 @utility text-h2 {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(2.125rem, 1.35rem + 2.6vw, 3.75rem);
-  line-height: 1.08;
-  letter-spacing: -0.01em;
+  font-size: clamp(1.875rem, 1.3rem + 2.3vw, 3.125rem);
+  line-height: 1.14;
+  letter-spacing: -0.015em;
 }
 @utility text-h3 {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(1.75rem, 1.3rem + 1.3vw, 2.5rem);
-  line-height: 1.15;
+  font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2.125rem);
+  line-height: 1.22;
 }
 @utility text-h4 {
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: 1.125rem;
+  font-size: 1.1875rem;
   line-height: 1.4;
-  letter-spacing: 0.005em;
+  letter-spacing: -0.005em;
 }
 @utility text-lead {
   font-size: clamp(1.0625rem, 0.95rem + 0.5vw, 1.3125rem);
   line-height: 1.65;
 }
-@utility text-small { font-size: 0.875rem; line-height: 1.6; }
+@utility text-small { font-size: 0.9375rem; line-height: 1.6; }
 @utility text-eyebrow {
   font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   line-height: 1.4;
 }
@@ -240,7 +240,7 @@ img { -webkit-user-drag: none; }
   background-image: repeating-linear-gradient(
     135deg,
     transparent 0 14px,
-    rgb(31 74 54 / 0.06) 14px 15px
+    color-mix(in srgb, var(--color-forest-700) 7%, transparent) 14px 15px
   );
 }
 .surface-dark .placeholder-fill {

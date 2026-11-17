@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Manrope } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import "./globals.css";
 import { company, siteUrl } from "@/data/company";
@@ -10,17 +10,17 @@ import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { JsonLd } from "@/components/ui/JsonLd";
 
-const display = Cormorant_Garamond({
+// Luxury pairing: Playfair Display (classic serif) for headings, Inter for body text.
+const display = Playfair_Display({
   subsets: ["latin"],
-  weight: ["500"], // the only weight the design uses — fewer font files to load
   style: ["normal", "italic"],
-  variable: "--font-cormorant",
+  variable: "--font-playfair",
   display: "swap",
 });
 
-const sans = Manrope({
+const sans = Inter({
   subsets: ["latin"],
-  variable: "--font-manrope",
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0f2a1f",
+  themeColor: "#131b2e",
   width: "device-width",
   initialScale: 1,
 };
