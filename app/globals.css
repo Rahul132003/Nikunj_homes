@@ -1,0 +1,304 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   NIKUNJ HOMES — DESIGN TOKENS
+   Every pairing used in the UI is contrast-checked (WCAG 2.2 AA). Ratios noted.
+   Gold (#C8A96A) is for rules, icons and LARGE text on forest only — never body
+   text on ivory (2.0:1). Use --color-bronze for small labels on light surfaces.
+   ========================================================================== */
+
+@theme {
+  /* Forest — primary */
+  --color-forest-950: #0a1f16;
+  --color-forest-900: #0f2a1f; /* 13.8:1 on ivory */
+  --color-forest-800: #163828; /* ivory on it 11.6:1 */
+  --color-forest-700: #1f4a36; /* 9.1:1 on ivory */
+  --color-forest-600: #2b6048;
+
+  /* Champagne gold — accent */
+  --color-gold-300: #e3d1a4;
+  --color-gold-400: #d6bd88;
+  --color-gold-500: #c8a96a; /* 6.8:1 on forest-900 · 2.0:1 on ivory */
+  --color-bronze: #7a5e24; /* gold's text-safe twin: 5.5:1 on ivory */
+
+  /* Neutrals */
+  --color-ivory: #f7f3ea;
+  --color-ivory-200: #efe8d8;
+  --color-ivory-300: #e4dcc8;
+  --color-white: #ffffff;
+  --color-charcoal: #1e2322; /* 14.4:1 on ivory */
+  --color-muted: #55605a; /* 5.9:1 on ivory */
+  --color-sage: #b9c4bc; /* 8.5:1 on forest-900 */
+  --color-field-border: #857f6c; /* 3.6:1 on ivory — UI component contrast */
+  --color-hairline: #d9d1bc; /* decorative only */
+  --color-error: #a3271c; /* 6.6:1 on ivory */
+
+  /* PGS GREENS accents — sampled from the catalogue. PGS page only. */
+  --color-pgs-olive: #728513; /* white on it 4.1:1 → large text only */
+  --color-pgs-olive-deep: #5c6b0f; /* white on it 5.9:1 */
+  --color-pgs-green: #416717; /* logo green: 6.0:1 on ivory */
+  --color-pgs-lime: #93af2c; /* 6.1:1 on forest-900 */
+  --color-pgs-wash: #e4e897; /* catalogue lime wash; forest-900 on it 11.9:1 */
+
+  /* Type */
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-manrope), "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --breakpoint-xs: 30rem;
+}
+
+/* Semantic, surface/theme-switchable colours. `inline` makes utilities resolve
+   the variable on the element itself, so .surface-dark and [data-theme="pgs"]
+   can re-point them (a plain @theme would freeze them at :root). */
+@theme inline {
+  --color-label: var(--label);
+  --color-rule: var(--rule);
+  --color-focus: var(--focus);
+}
+
+:root {
+  --label: var(--color-bronze);
+  --rule: var(--color-gold-500);
+  --focus: var(--color-forest-700);
+  --header-h: 4.25rem;
+  color-scheme: light;
+}
+@media (min-width: 1024px) {
+  :root { --header-h: 5rem; }
+}
+
+/* PGS GREENS page: catalogue olive/lime used ONLY as accents via these tokens */
+[data-theme="pgs"] {
+  --label: var(--color-pgs-green);
+  --rule: var(--color-pgs-lime);
+  --focus: var(--color-pgs-olive-deep);
+}
+
+/* Dark surfaces re-point the semantic tokens */
+.surface-dark {
+  --label: var(--color-gold-400);
+  --rule: var(--color-gold-500);
+  --focus: var(--color-gold-400);
+  background-color: var(--color-forest-900);
+  color: var(--color-ivory);
+}
+[data-theme="pgs"] .surface-dark {
+  --label: var(--color-pgs-lime);
+  --rule: var(--color-pgs-lime);
+  --focus: var(--color-pgs-wash);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+html {
+  scroll-padding-top: calc(var(--header-h) + 1rem);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+body {
+  background: var(--color-ivory);
+  color: var(--color-charcoal);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.7;
+  font-feature-settings: "kern", "liga";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--color-gold-400); color: var(--color-forest-950); }
+
+/* Visible keyboard focus everywhere — colour follows the surface */
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+:focus:not(:focus-visible) { outline: none; }
+
+img { -webkit-user-drag: none; }
+
+/* ==========================================================================
+   Type scale — fluid. Display serif is only used at ≥ 28px (thin strokes).
+   ========================================================================== */
+
+@utility text-display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(3rem, 1.2rem + 6.4vw, 6.75rem);
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+@utility text-h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.5rem, 1.4rem + 3.9vw, 4.75rem);
+  line-height: 1.04;
+  letter-spacing: -0.012em;
+}
+@utility text-h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.125rem, 1.35rem + 2.6vw, 3.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+@utility text-h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.75rem, 1.3rem + 1.3vw, 2.5rem);
+  line-height: 1.15;
+}
+@utility text-h4 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.4;
+  letter-spacing: 0.005em;
+}
+@utility text-lead {
+  font-size: clamp(1.0625rem, 0.95rem + 0.5vw, 1.3125rem);
+  line-height: 1.65;
+}
+@utility text-small { font-size: 0.875rem; line-height: 1.6; }
+@utility text-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   Layout helpers
+   ========================================================================== */
+
+@utility container-x {
+  width: 100%;
+  max-width: 82.5rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (min-width: 40rem) { padding-inline: 2.5rem; }
+  @media (min-width: 64rem) { padding-inline: 4rem; }
+}
+@utility section-y {
+  padding-block: clamp(4rem, 2.5rem + 6vw, 9rem);
+}
+@utility section-y-sm {
+  padding-block: clamp(3rem, 2rem + 4vw, 6rem);
+}
+
+/* Gold hairline that grows from the left — transform only */
+.rule-grow {
+  height: 1px;
+  background: var(--color-rule);
+  transform-origin: left center;
+}
+
+/* Animated link underline — transform only */
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.5s var(--ease-out-expo);
+}
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* Subtle paper grain on dark surfaces */
+.grain::before {
+  content: "";
+  position: absolute; inset: 0;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Striped placeholder fill for "image to be provided" slots */
+.placeholder-fill {
+  background-color: var(--color-ivory-200);
+  background-image: repeating-linear-gradient(
+    135deg,
+    transparent 0 14px,
+    rgb(31 74 54 / 0.06) 14px 15px
+  );
+}
+.surface-dark .placeholder-fill {
+  background-color: var(--color-forest-800);
+  background-image: repeating-linear-gradient(135deg, transparent 0 14px, rgb(255 255 255 / 0.05) 14px 15px);
+}
+
+/* ==========================================================================
+   Entrance keyframes (CSS, so above-the-fold content never waits on JS).
+   Only transform + opacity are animated anywhere in the site.
+   ========================================================================== */
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translate3d(0, 28px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes line-grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes line-grow-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(2%, -2%, 0) scale(1.06); }
+}
+@keyframes cue {
+  0% { transform: scaleY(0); transform-origin: top; }
+  45% { transform: scaleY(1); transform-origin: top; }
+  55% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+@keyframes ping-ring {
+  0% { opacity: 0.7; transform: scale(0.7); }
+  100% { opacity: 0; transform: scale(2.1); }
+}
+
+.anim-rise { opacity: 0; animation: rise-in 0.85s var(--ease-out-expo) forwards; animation-delay: var(--d, 0ms); }
+.anim-fade { opacity: 0; animation: fade-in 1.4s ease-out forwards; animation-delay: var(--d, 0ms); }
+.anim-line-y { transform: scaleY(0); transform-origin: top; animation: line-grow 1.6s var(--ease-out-expo) forwards; animation-delay: var(--d, 0ms); }
+.anim-line-x { transform: scaleX(0); transform-origin: left; animation: line-grow-x 1.4s var(--ease-out-expo) forwards; animation-delay: var(--d, 0ms); }
+.anim-drift { animation: drift 24s ease-in-out infinite; }
+.anim-cue { animation: cue 2.4s ease-in-out infinite; }
+.anim-ping { animation: ping-ring 1.8s ease-out infinite; }
+
+/* Honour reduced motion globally: no transforms, no parallax, no loops */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .anim-rise, .anim-fade { opacity: 1; animation: none; }
+  .anim-line-y, .anim-line-x { transform: none; animation: none; }
+  .anim-drift, .anim-cue, .anim-ping { animation: none; }
+}
+
+/* Screen-reader only */
+.sr-only-focusable:not(:focus):not(:focus-within) {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
