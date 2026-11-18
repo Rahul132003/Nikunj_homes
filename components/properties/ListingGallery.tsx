@@ -2,14 +2,15 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
+import Image from "next/image";
+import type { ListingImage } from "@/data/properties";
 import { cn } from "@/lib/cn";
 
 /**
  * Property-detail gallery: large stage + thumbnail rail, arrow keys when focused.
- * Slots are named placeholders; pass real image objects here when photos arrive.
+ * Pass the listing's image objects; sample listings use stand-in photographs.
  */
-export function ListingGallery({ slots }: { slots: string[] }) {
+export function ListingGallery({ slots }: { slots: ListingImage[] }) {
   const [i, setI] = useState(0);
   const go = (d: number) => setI((v) => (v + d + slots.length) % slots.length);
 
@@ -33,7 +34,7 @@ export function ListingGallery({ slots }: { slots: string[] }) {
             transition={{ duration: 0.35 }}
             aria-live="polite"
           >
-            <ImagePlaceholder label={slots[i]} ratio="16 / 10" className="text-forest-700" />
+            <div className="relative aspect-[16/10] overflow-hidden bg-ivory-200"><Image src={slots[i].src} alt={slots[i].alt} fill priority={i === 0} sizes="(min-width:1024px) 66vw, 100vw" className="object-cover" /></div>
           </motion.div>
         </AnimatePresence>
         {(["prev", "next"] as const).map((d) => (
@@ -54,7 +55,7 @@ export function ListingGallery({ slots }: { slots: string[] }) {
       </div>
       <ul className="mt-3 grid grid-cols-4 gap-3">
         {slots.map((s, idx) => (
-          <li key={s}>
+          <li key={s.src}>
             <button
               type="button"
               onClick={() => setI(idx)}
@@ -62,7 +63,7 @@ export function ListingGallery({ slots }: { slots: string[] }) {
               aria-current={idx === i}
               className={cn("block w-full border-2 transition-colors", idx === i ? "border-forest-900" : "border-transparent opacity-70 hover:opacity-100")}
             >
-              <ImagePlaceholder label={`Image ${idx + 1}`} ratio="4 / 3" className="text-forest-700 [&_span]:text-[0.6875rem] [&_svg]:h-5 [&_svg]:w-5" />
+              <span className="relative block aspect-[4/3] overflow-hidden"><Image src={s.src} alt="" fill sizes="20vw" className="object-cover" /></span>
             </button>
           </li>
         ))}

@@ -78,7 +78,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
           </div>
           <Reveal delay={0.1}>
             <p className="mt-6 max-w-2xl border-l-2 border-bronze bg-ivory-200 px-5 py-4 text-small text-charcoal">
-              <strong>Template preview.</strong> No live {c.title.toLowerCase()} listings have been supplied yet. The card below shows how a listing will look — every value is a placeholder.
+              <strong>Sample listings.</strong> No live {c.title.toLowerCase()} listings have been supplied yet. The cards below are illustrations — details and photographs are samples, not real inventory.
             </p>
           </Reveal>
           <ul className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">

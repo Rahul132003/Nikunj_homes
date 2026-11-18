@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { heroCaption, heroes, isLowRes, type HeroKey } from "@/data/heroes";
+import { heroes, isLowRes, type HeroKey } from "@/data/heroes";
 import { Eyebrow } from "@/components/ui/Typography";
 
 interface Crumb { label: string; href?: string }
@@ -57,7 +57,6 @@ export function PageHero({
       ) : (
         <div aria-hidden className="pointer-events-none absolute -right-1/4 -top-1/3 -z-10 h-[90vmin] w-[90vmin] rounded-full bg-forest-700/50 blur-[120px] anim-drift" />
       )}
-      <div aria-hidden className="anim-line-y absolute bottom-0 left-[8%] -z-10 hidden h-full w-px bg-gold-500/25 lg:block" style={{ "--d": "300ms" } as React.CSSProperties} />
 
       <div className="container-x">
         {crumbs && (
@@ -85,12 +84,6 @@ export function PageHero({
         )}
         {children && <div className="anim-rise mt-10" style={{ "--d": "420ms" } as React.CSSProperties}>{children}</div>}
       </div>
-
-      {img?.representative && (
-        <p className="absolute bottom-4 right-4 z-10 hidden rounded-[2px] bg-forest-950/75 px-3 py-1.5 text-[0.6875rem] text-ivory/85 sm:block lg:right-8">
-          {heroCaption}
-        </p>
-      )}
       <div aria-hidden className="anim-line-x absolute inset-x-0 bottom-0 h-px bg-gold-500/40" style={{ "--d": "500ms" } as React.CSSProperties} />
     </section>
   );

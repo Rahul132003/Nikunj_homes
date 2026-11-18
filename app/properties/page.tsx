@@ -1,10 +1,10 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { categories } from "@/data/properties";
 import { pgsRelationship } from "@/data/company";
 import { buildMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/layout/PageHero";
-import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 import { LinkButton } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Typography";
 import { Reveal } from "@/components/motion/Reveal";
@@ -35,7 +35,7 @@ export default function PropertiesPage() {
                 <Reveal className={`lg:col-span-6 ${flip ? "lg:order-2" : ""}`}>
                   {/* decorative duplicate of the button link below — kept out of the tab order */}
                   <Link href={`/properties/${c.slug}`} tabIndex={-1} aria-hidden="true" className="group block overflow-hidden">
-                    <ImagePlaceholder label={`${c.imagePlaceholder} – to be provided`} ratio="5 / 4" className="text-forest-700 transition-transform duration-[1400ms] ease-out group-hover:scale-[1.03]" />
+                    <span className="relative block aspect-[5/4] overflow-hidden"><Image src={c.image.src} alt={c.image.alt} fill sizes="(min-width:1024px) 50vw, 100vw" className="object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.03]" /></span>
                   </Link>
                 </Reveal>
                 <div className={`lg:col-span-5 ${flip ? "lg:order-1 lg:col-start-1" : "lg:col-start-8"}`}>

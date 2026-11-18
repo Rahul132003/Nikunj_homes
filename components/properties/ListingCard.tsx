@@ -1,24 +1,24 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Listing } from "@/data/properties";
-import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
-import { Tbp } from "@/components/ui/Typography";
 
-/** Refined listing card — image-led, hairline border, hover rule. Template data renders as placeholders. */
+/** Refined listing card — image-led, hairline border, hover rule. Sample listings are badged. */
 export function ListingCard({ listing }: { listing: Listing }) {
+  const cover = listing.images[0];
   return (
     <Link
       href={`/properties/${listing.category}/${listing.slug}`}
       className="group block border border-hairline bg-white transition-colors duration-500 hover:border-forest-900"
     >
-      <div className="relative overflow-hidden">
-        <ImagePlaceholder label={listing.imageSlots[0]} ratio="3 / 2" className="text-forest-700 transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]" />
+      <div className="relative aspect-[3/2] overflow-hidden">
+        <Image src={cover.src} alt={cover.alt} fill sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw" className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]" />
         {listing.isTemplate && (
-          <span className="text-eyebrow absolute left-4 top-4 bg-forest-900 px-3 py-1.5 text-ivory">Template</span>
+          <span className="text-eyebrow absolute left-4 top-4 bg-forest-900 px-3 py-1.5 text-ivory">Sample</span>
         )}
       </div>
       <div className="p-6">
         <p className="text-eyebrow text-label">{listing.propertyType}</p>
-        <h3 className="mt-3 font-display text-[1.875rem] leading-tight text-forest-900"><Tbp className="!border-0 !p-0">{listing.title}</Tbp></h3>
+        <h3 className="mt-3 font-display text-[1.875rem] leading-tight text-forest-900">{listing.title}</h3>
         <dl className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-hairline pt-5 text-small">
           <div><dt className="text-muted">Location</dt><dd className="mt-0.5 text-charcoal">{listing.location}</dd></div>
           <div><dt className="text-muted">Area</dt><dd className="mt-0.5 text-charcoal">{listing.area}</dd></div>

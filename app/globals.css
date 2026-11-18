@@ -4,7 +4,7 @@
    NIKUNJ HOMES — DESIGN TOKENS
    Every pairing used in the UI is contrast-checked (WCAG 2.2 AA). Ratios noted.
    Champagne gold (#C8A96A) is for rules, icons and LARGE text on navy only — never body
-   text on ivory (2.1:1). Use --color-bronze for small labels on light surfaces.
+   text on ivory (2.0:1). Use --color-bronze for small labels on light surfaces.
    ========================================================================== */
 
 @theme {

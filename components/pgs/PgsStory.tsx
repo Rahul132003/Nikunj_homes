@@ -4,6 +4,10 @@ import { Eyebrow, Heading, Tbp } from "@/components/ui/Typography";
 import { Parallax } from "@/components/motion/Parallax";
 import { Reveal } from "@/components/motion/Reveal";
 
+/**
+ * Project story — the forest-path photograph runs full width *behind* the text,
+ * under a dark overlay so the copy stays comfortably readable.
+ */
 export function PgsStory() {
   const f = pgsGreens;
   const glance: [string, React.ReactNode][] = [
@@ -18,31 +22,36 @@ export function PgsStory() {
   ];
 
   return (
-    <section id="story" aria-labelledby="story-heading" className="section-y relative overflow-hidden">
-      <div aria-hidden className="absolute -left-40 top-24 -z-10 h-[34rem] w-[34rem] rounded-full bg-pgs-wash/60 blur-3xl" />
-      <div className="container-x grid items-start gap-14 lg:grid-cols-12 lg:gap-20">
-        {/* arch-framed portrait — echoes the catalogue's rounded panels */}
-        <Reveal className="lg:col-span-5">
-          <figure>
-            <div className="relative mx-auto aspect-[2/3] max-w-md overflow-hidden rounded-t-[999px] bg-forest-800 lg:max-w-none">
-              <Parallax className="absolute inset-0" amount={5}>
-                <Image src={f.hero.forest.src} alt={f.hero.forest.alt} fill quality={62} sizes="(min-width: 1024px) 40vw, 340px" className="object-cover" />
-              </Parallax>
-            </div>
-            <figcaption className="mt-4 text-small text-muted">Representative image, as per developer’s catalogue.</figcaption>
-          </figure>
-        </Reveal>
+    <section id="story" aria-labelledby="story-heading" className="surface-dark section-y relative isolate overflow-hidden">
+      {/* background photograph (full bleed) + readability overlays */}
+      <Parallax className="absolute inset-0 -z-20" amount={4}>
+        <Image
+          src={f.hero.forest.src}
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+          style={{ objectPosition: "50% 60%" }}
+        />
+      </Parallax>
+      <div aria-hidden className="absolute inset-0 -z-10 bg-forest-950/70" />
+      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-forest-950/60 via-transparent to-forest-950/40" />
 
-        <div className="lg:col-span-7 lg:pt-10">
+      <div className="container-x grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
+        {/* heading + pull quote */}
+        <div className="lg:col-span-5">
           <Reveal><Eyebrow>Project story</Eyebrow></Reveal>
           <Reveal delay={0.08}>
-            <Heading id="story-heading" className="mt-6 text-forest-900">{f.moodHeading}</Heading>
+            <Heading id="story-heading" className="mt-6">{f.moodHeading}</Heading>
           </Reveal>
           <Reveal delay={0.14}>
-            <p className="mt-6 max-w-xl font-display text-[1.625rem] italic leading-snug text-pgs-green sm:text-[1.875rem]">{f.moodText}</p>
+            <p className="mt-6 max-w-xl font-display text-[1.625rem] italic leading-snug text-pgs-wash sm:text-[1.875rem]">{f.moodText}</p>
           </Reveal>
+        </div>
 
-          <div className="mt-10 space-y-5 text-[1.0625rem] leading-[1.8] text-charcoal">
+        {/* story + at-a-glance */}
+        <div className="lg:col-span-7">
+          <div className="space-y-5 text-[1.0625rem] leading-[1.8] text-ivory/95">
             {f.story.map((p, i) => (
               <Reveal key={i} delay={0.05 * i}><p>{p}</p></Reveal>
             ))}
@@ -51,19 +60,21 @@ export function PgsStory() {
           <Reveal delay={0.1}>
             <div className="mt-12">
               <h3 className="text-eyebrow mb-4 text-label">Project at a glance</h3>
-              <dl className="grid border-t border-hairline sm:grid-cols-2 sm:gap-x-10">
+              <dl className="grid border-t border-white/25 sm:grid-cols-2 sm:gap-x-10">
                 {glance.map(([k, v]) => (
-                  <div key={k} className="grid grid-cols-[8.5rem_1fr] gap-4 border-b border-hairline py-3.5 text-[0.9375rem]">
-                    <dt className="text-muted">{k}</dt>
-                    <dd className="font-medium text-forest-900">{v}</dd>
+                  <div key={k} className="grid grid-cols-[8.5rem_1fr] gap-4 border-b border-white/25 py-3.5 text-[0.9375rem]">
+                    <dt className="text-sage">{k}</dt>
+                    <dd className="font-medium text-ivory">{v}</dd>
                   </div>
                 ))}
               </dl>
-              <p className="mt-4 text-small text-muted">As per developer’s catalogue. Items in brackets were not provided.</p>
+              <p className="mt-4 text-small text-sage">As per developer’s catalogue. Items in brackets were not provided.</p>
             </div>
           </Reveal>
         </div>
       </div>
+
+      <p className="container-x relative mt-12 text-small text-sage">Representative image, as per developer’s catalogue.</p>
     </section>
   );
 }

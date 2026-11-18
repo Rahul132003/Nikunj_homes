@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { company, pgsRelationship } from "@/data/company";
-import { heroCaption, heroes } from "@/data/heroes";
+import { heroes } from "@/data/heroes";
 import { pgsGreens } from "@/data/projects";
 import { LinkButton } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Typography";
@@ -10,7 +10,7 @@ const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
 /**
  * Home hero. No Nikunj Homes photography has been supplied, so the cinematic
- * effect is built from light, depth and hairlines over a stand-in photograph
+ * effect is built from light and depth over a stand-in photograph
  * (data/heroes.ts). A real photo in `company.heroImage` takes over automatically.
  */
 export function HomeHero() {
@@ -50,10 +50,6 @@ export function HomeHero() {
           <LinkButton href="/sell" variant="outline-light" size="lg">Sell your property</LinkButton>
         </div>
       </div>
-
-      {!company.heroImage && heroes.home.representative && (
-        <p className="absolute bottom-3 left-1/2 z-10 hidden -translate-x-1/2 text-[0.6875rem] text-ivory/70 sm:block">{heroCaption}</p>
-      )}
 
       {/* bottom rail: scroll cue + featured project */}
       <div className="container-x relative pb-24 sm:pb-8 lg:pb-10">
