@@ -8,6 +8,7 @@ const items = [
   { id: "features", label: "Features" },
   { id: "nature", label: "Nature" },
   { id: "clubhouse", label: "Clubhouse" },
+  { id: "site-visit", label: "Site visit" },
   { id: "layout", label: "Layout plan" },
   { id: "location", label: "Location" },
   { id: "enquire", label: "Enquire" },

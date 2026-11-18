@@ -12,6 +12,7 @@ import { KeyFeatures } from "@/components/pgs/KeyFeatures";
 import { NatureInspired } from "@/components/pgs/NatureInspired";
 import { ClubhouseGallery } from "@/components/pgs/ClubhouseGallery";
 import { WhyPgsGreens } from "@/components/pgs/WhyPgsGreens";
+import { PgsSiteVideos } from "@/components/pgs/PgsSiteVideos";
 import { PlanViewer } from "@/components/pgs/PlanViewer";
 import { LocationSection } from "@/components/pgs/LocationSection";
 import { PreviousProjects } from "@/components/pgs/PreviousProjects";
@@ -51,6 +52,7 @@ export default function PgsGreensPage() {
       <NatureInspired />
       <ClubhouseGallery />
       <WhyPgsGreens />
+      <PgsSiteVideos />
 
       <section id="layout" aria-labelledby="layout-heading" className="section-y">
         <div className="container-x">

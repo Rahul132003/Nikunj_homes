@@ -47,7 +47,9 @@ export function useEnquiryForm(kind: EnquiryKind, initial: Values) {
     value: (values[name] as string) ?? "",
     error: visible(name),
     onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => set(name, e.target.value),
-    onBlur: () => setTouched((t) => ({ ...t, [name]: true })),
+    // Only flag a field on blur once the user has typed something: showing an "empty" error
+    // while they click Submit shifts the layout under the pointer and swallows the click.
+    onBlur: () => { if (String(values[name] ?? "").length > 0) setTouched((t) => ({ ...t, [name]: true })); },
   });
 
   const onSubmit = async (e: FormEvent) => {
