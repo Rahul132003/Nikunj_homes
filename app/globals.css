@@ -41,8 +41,8 @@
   --color-pgs-wash: #e4e897; /* catalogue lime wash; forest-900 on it 11.9:1 */
 
   /* Type */
-  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
-  --font-sans: var(--font-manrope), "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-playfair), "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), "Inter", "Open Sans", Roboto, Lato, system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
   --breakpoint-xs: 30rem;
@@ -106,7 +106,7 @@ body {
   background: var(--color-ivory);
   color: var(--color-charcoal);
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: 1.0625rem; /* 17px — within the 16–18px readable range */
   line-height: 1.7;
   font-feature-settings: "kern", "liga";
   text-rendering: optimizeLegibility;
@@ -126,53 +126,53 @@ body {
 img { -webkit-user-drag: none; }
 
 /* ==========================================================================
-   Type scale — fluid. Display serif is only used at ≥ 28px (thin strokes).
+   Type scale — fluid. Playfair Display (serif) for headings, Inter for body/labels; body 17px.
    ========================================================================== */
 
 @utility text-display {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(3rem, 1.2rem + 6.4vw, 6.75rem);
-  line-height: 1;
-  letter-spacing: -0.015em;
+  font-size: clamp(2.5rem, 1.2rem + 5.4vw, 5.5rem);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
 }
 @utility text-h1 {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(2.5rem, 1.4rem + 3.9vw, 4.75rem);
-  line-height: 1.04;
-  letter-spacing: -0.012em;
+  font-size: clamp(2.25rem, 1.4rem + 3.3vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: -0.018em;
 }
 @utility text-h2 {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(2.125rem, 1.35rem + 2.6vw, 3.75rem);
-  line-height: 1.08;
-  letter-spacing: -0.01em;
+  font-size: clamp(1.875rem, 1.3rem + 2.3vw, 3.125rem);
+  line-height: 1.14;
+  letter-spacing: -0.015em;
 }
 @utility text-h3 {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(1.75rem, 1.3rem + 1.3vw, 2.5rem);
-  line-height: 1.15;
+  font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2.125rem);
+  line-height: 1.22;
 }
 @utility text-h4 {
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: 1.125rem;
+  font-size: 1.1875rem;
   line-height: 1.4;
-  letter-spacing: 0.005em;
+  letter-spacing: -0.005em;
 }
 @utility text-lead {
   font-size: clamp(1.0625rem, 0.95rem + 0.5vw, 1.3125rem);
   line-height: 1.65;
 }
-@utility text-small { font-size: 0.875rem; line-height: 1.6; }
+@utility text-small { font-size: 0.9375rem; line-height: 1.6; }
 @utility text-eyebrow {
   font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   line-height: 1.4;
 }
