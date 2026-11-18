@@ -17,7 +17,6 @@ export const metadata: Metadata = buildMetadata({
 const details: [string, string][] = [
   ["Registered name", company.registration.legalName],
   ["Year established", tbp("Year established")],
-  ["RERA agent registration", company.registration.rera],
   ["GSTIN", company.registration.gst],
   ["Team", tbp("Team details")],
   ["Areas served", tbp("Areas served")],

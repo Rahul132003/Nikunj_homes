@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { company, legal, pgsRelationship } from "@/data/company";
+import { company } from "@/data/company";
 import { footerNav } from "@/data/navigation";
 import { Wordmark } from "./Wordmark";
 import { Tbp } from "@/components/ui/Typography";
@@ -55,10 +55,13 @@ export function Footer() {
 
         <div className="mt-8 grid gap-6 text-small text-sage lg:grid-cols-12">
           <p className="lg:col-span-7">
-            <strong className="font-semibold text-ivory">{pgsRelationship.label}:</strong> PGS GREENS. {legal.formDisclaimer}
+            © {new Date().getFullYear()} Nikunj Homes. All rights reserved.
           </p>
           <p className="lg:col-span-5 lg:text-right">
-            © {new Date().getFullYear()} Nikunj Homes. {company.registration.rera}
+            Designed &amp; developed by{" "}
+            <a href="https://www.hashxlabs.com" target="_blank" rel="noopener noreferrer" className="link-underline font-semibold text-ivory hover:text-gold-400">
+              HashX Labs
+            </a>
           </p>
         </div>
       </div>
