@@ -5,7 +5,7 @@
  * labelled SAMPLE listings (illustrative details, stand-in photographs borrowed
  * from the PGS GREENS catalogue) plus, for Farm Houses, the featured PGS GREENS
  * project. Replace `listings` with confirmed stock; nothing here describes real
- * inventory. Sample pages are noindex.
+ * inventory. Sample pages are noindex. Category cover photos in public/images/samples are free-to-use\n * Unsplash stock images, stand-ins until real photographs are supplied.
  */
 const IMG = "/images/pgs-greens";
 
@@ -23,7 +23,7 @@ export interface PropertyCategory {
   image: ListingImage;
 }
 
-export interface ListingImage { src: string; alt: string }
+export interface ListingImage { src: string; alt: string; /** CSS object-position for tall crops */ position?: string }
 
 export const categories: PropertyCategory[] = [
   {
@@ -34,7 +34,7 @@ export const categories: PropertyCategory[] = [
       "Buy or sell residential property in Faridabad and across Delhi-NCR with a firm that handles the conversation from first enquiry to closing.",
     helps: ["Buying a residential property", "Selling a residential property", "Investing in residential property"],
     imagePlaceholder: "Residential – property image",
-    image: { src: `${IMG}/previous-projects/pgs-florence.webp`, alt: "Sample image: a multi-storey apartment building with balconies" },
+    image: { src: "/images/samples/residential.webp", alt: "Sample image: a modern apartment building with balconies and greenery", position: "50% 40%" },
   },
   {
     slug: "commercial",
@@ -44,7 +44,7 @@ export const categories: PropertyCategory[] = [
       "Commercial property for businesses and investors, bought and sold through Nikunj Homes.",
     helps: ["Buying commercial property", "Selling commercial property", "Investing in commercial property"],
     imagePlaceholder: "Commercial – property image",
-    image: { src: `${IMG}/clubhouse/dine-in.webp`, alt: "Sample image: a dining space" },
+    image: { src: "/images/samples/commercial.webp", alt: "Sample image: glass office towers seen from below", position: "50% 50%" },
   },
   {
     slug: "industrial",
@@ -54,7 +54,7 @@ export const categories: PropertyCategory[] = [
       "Industrial property for manufacturers, warehousing and investors, bought and sold through Nikunj Homes.",
     helps: ["Buying industrial property", "Selling industrial property", "Investing in industrial property"],
     imagePlaceholder: "Industrial – property image",
-    image: { src: `${IMG}/why/wide-roads.webp`, alt: "Sample image: a wide planned road" },
+    image: { src: "/images/samples/industrial.webp", alt: "Sample image: a steel-clad warehouse with a roller door", position: "40% 50%" },
   },
   {
     slug: "farm-houses",
@@ -64,7 +64,7 @@ export const categories: PropertyCategory[] = [
       "Farm house properties and farmhouse land for those who want space, greenery and a life beyond the city.",
     helps: ["Buying farm house property", "Selling farm house property", "Investing in farmhouse land"],
     imagePlaceholder: "Farm house – property image",
-    image: { src: `${IMG}/hero/connect-with-nature-cabin.webp`, alt: "Sample image: a timber lodge among tall trees" },
+    image: { src: "/images/samples/farm-houses.webp", alt: "Sample image: a white farmhouse on a wide lawn", position: "45% 50%" },
   },
 ];
 

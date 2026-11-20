@@ -3,35 +3,35 @@
 /* ==========================================================================
    NIKUNJ HOMES — DESIGN TOKENS
    Every pairing used in the UI is contrast-checked (WCAG 2.2 AA). Ratios noted.
-   Champagne gold (#C8A96A) is for rules, icons and LARGE text on navy only — never body
+   Sunshine yellow (#F5C518) is for rules, icons and buttons on graphite only — never body
    text on ivory (2.0:1). Use --color-bronze for small labels on light surfaces.
    ========================================================================== */
 
 @theme {
   /* Forest — primary */
-  --color-forest-950: #0b1120; /* deepest navy — overlays */
-  --color-forest-900: #131b2e; /* primary dark: 15.8:1 with ivory; headings on ivory */
-  --color-forest-800: #1b2540; /* raised dark surface */
-  --color-forest-700: #2a3556; /* hover / secondary dark: ivory on it 11.1:1 */
-  --color-forest-600: #3f4a6b;
+  --color-forest-950: #101215; /* deepest graphite — overlays */
+  --color-forest-900: #1b1e23; /* primary dark: ivory on it 15.5:1; headings on cloud white */
+  --color-forest-800: #262a31; /* raised dark surface */
+  --color-forest-700: #363b45; /* hover / secondary dark */
+  --color-forest-600: #4d535f;
 
   /* Champagne gold — accent */
-  --color-gold-300: #e3d1a4;
-  --color-gold-400: #d6bd88; /* champagne — small labels on dark: 9.4:1 */
-  --color-gold-500: #c8a96a; /* champagne — rules, icons, large text on dark: 7.6:1; NOT for text on ivory (2.1:1) */
-  --color-bronze: #7a5e24; /* champagne text-safe twin: 5.6:1 on ivory */
+  --color-gold-300: #ffe78f;
+  --color-gold-400: #ffd84d; /* sunshine — small labels on dark */
+  --color-gold-500: #f5c518; /* sunshine — rules, icons, buttons; NOT for text on cloud white (1.5:1) */
+  --color-bronze: #755800; /* sunshine text-safe twin for light surfaces: 6.2:1 */
 
   /* Neutrals */
-  --color-ivory: #f8f5ef;
-  --color-ivory-200: #efeae0;
-  --color-ivory-300: #e3dccd;
+  --color-ivory: #f6f7f9; /* cloud white */
+  --color-ivory-200: #eceef2;
+  --color-ivory-300: #dfe2e8;
   --color-white: #ffffff;
-  --color-charcoal: #151a2b; /* 15.9:1 on ivory */
-  --color-muted: #535768; /* 6.6:1 on ivory */
-  --color-sage: #b8c0d4; /* secondary text on dark: 9.4:1 */
-  --color-field-border: #7d7f90; /* 3.9:1 on white — UI component contrast */
-  --color-hairline: #dcd5c4; /* decorative only */
-  --color-error: #a3271c; /* 6.7:1 on ivory */
+  --color-charcoal: #16191d;
+  --color-muted: #555b66;
+  --color-sage: #bfc4cd; /* secondary text on dark */
+  --color-field-border: #80858f;
+  --color-hairline: #dcdfe5;
+  --color-error: #a3271c;
 
   /* PGS GREENS accents — sampled from the catalogue. PGS page only. */
   --color-pgs-olive: #728513; /* white on it 4.1:1 → large text only */

@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#131b2e",
+  themeColor: "#1b1e23",
   width: "device-width",
   initialScale: 1,
 };
@@ -64,8 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </main>
           <Footer />
-          <WhatsAppButton />
-          <JsonLd data={organizationJsonLd} />
+          <WhatsAppButton />          <JsonLd data={organizationJsonLd} />
         </MotionConfig>
       </body>
     </html>
