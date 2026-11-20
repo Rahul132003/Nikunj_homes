@@ -21,7 +21,7 @@ import { PgsEnquirySection } from "@/components/pgs/PgsEnquirySection";
 const description = `${pgsRelationship.label}: ${pgsGreens.name}, an upcoming luxury farmhouse land development of ${pgsGreens.area.value} ${pgsGreens.area.unit} in ${pgsGreens.locationLine}. Details as per developer’s catalogue.`;
 
 export const metadata: Metadata = buildMetadata({
-  title: `${pgsGreens.name} — ${pgsRelationship.label}`,
+  title: `${pgsGreens.name}: farmhouse land, Motipur, Manjhawali`,
   description,
   path: "/projects/pgs-greens",
   image: pgsGreens.hero.photo.src,
@@ -37,7 +37,7 @@ const pageJsonLd = {
   about: {
     "@type": "Place",
     name: pgsGreens.name,
-    address: { "@type": "PostalAddress", addressLocality: "Motipur, Greater Noida", addressRegion: "Uttar Pradesh", addressCountry: "IN" },
+    address: { "@type": "PostalAddress", addressLocality: "Motipur, Manjhawali, Greater Noida", addressRegion: "Uttar Pradesh", addressCountry: "IN" },
   },
 };
 

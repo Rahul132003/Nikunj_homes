@@ -9,6 +9,7 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { JsonLd } from "@/components/ui/JsonLd";
+import { AnalyticsScripts } from "@/components/layout/AnalyticsScripts";
 
 // Luxury pairing: Playfair Display (classic serif) for headings, Inter for body text.
 const display = Playfair_Display({
@@ -64,7 +65,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </main>
           <Footer />
-          <WhatsAppButton />          <JsonLd data={organizationJsonLd} />
+          <WhatsAppButton />
+          <JsonLd data={organizationJsonLd} />
+          <AnalyticsScripts />
         </MotionConfig>
       </body>
     </html>

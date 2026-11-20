@@ -6,8 +6,9 @@ import { Eyebrow } from "@/components/ui/Typography";
 import { Reveal } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Sell Your Property",
-  description: "Share details of your residential, commercial, industrial or farm house property with Nikunj Homes, Faridabad.",
+  title: "Sell your property in Faridabad",
+  description:
+    "Want to sell a residential, commercial, industrial or farm house property in Faridabad? Share a few details with Nikunj Homes and we’ll get back to you.",
   path: "/sell",
 });
 

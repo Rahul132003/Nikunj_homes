@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { SmoothImage } from "@/components/ui/SmoothImage";
 import Link from "next/link";
 import { categories } from "@/data/properties";
 import { Eyebrow, Heading } from "@/components/ui/Typography";
@@ -45,7 +45,7 @@ export function CategoryIndex() {
                   className="relative flex h-[26rem] w-full flex-col justify-end focus-visible:outline-4! focus-visible:outline-offset-[-4px]! focus-visible:outline-gold-400! md:h-[30rem] lg:h-full"
                 >
                   {/* photograph — slow zoom on hover / focus */}
-                  <Image
+                  <SmoothImage
                     src={c.image.src}
                     alt={c.image.alt}
                     fill

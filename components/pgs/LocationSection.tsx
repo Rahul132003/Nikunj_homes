@@ -49,7 +49,8 @@ export function LocationSection() {
                   <Reveal delay={i * 0.05}>
                     <div className="flex items-baseline justify-between gap-4">
                       <p className="text-[1rem] font-semibold text-forest-900">
-                        {h.status === "proposed" && <span className="mr-2 rounded-[2px] border border-dashed border-pgs-green px-1.5 py-0.5 text-[0.6875rem] font-bold uppercase tracking-wider text-pgs-green">Proposed</span>}
+                        {h.minutes === null && <span className="mr-2 rounded-[2px] bg-pgs-wash px-1.5 py-0.5 text-[0.6875rem] font-bold uppercase tracking-wider text-forest-900">Landmark</span>}
+                        {h.status === "proposed" &&<span className="mr-2 rounded-[2px] border border-dashed border-pgs-green px-1.5 py-0.5 text-[0.6875rem] font-bold uppercase tracking-wider text-pgs-green">Proposed</span>}
                         {h.place}
                       </p>
                       {h.minutes === null ? (

@@ -9,6 +9,7 @@ import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import type { HeroKey } from "@/data/heroes";
 import { PageHero } from "@/components/layout/PageHero";
 import { ListingCard } from "@/components/properties/ListingCard";
+import { LandmarkFeature } from "@/components/properties/LandmarkFeature";
 import { LinkButton } from "@/components/ui/Button";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { Eyebrow } from "@/components/ui/Typography";
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
   const { category } = await params;
   const c = getCategory(category);
   if (!c) return {};
-  return buildMetadata({ title: `${c.title} properties`, description: c.intro, path: `/properties/${c.slug}` });
+  return buildMetadata({ title: `${c.title} properties in Faridabad`, description: `${c.intro} Enquire with Nikunj Homes, Faridabad.`, path: `/properties/${c.slug}` });
 }
 
 export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
@@ -57,6 +58,10 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
                   <h2 id="featured-h" className="text-h2 mt-4 text-forest-900">{f.name}</h2>
                   <p className="mt-2 font-display text-[1.5rem] italic text-pgs-green">{f.tagline}</p>
                   <p className="mt-5 text-muted">{f.type} of {f.area.value} {f.area.unit} in {f.locationLine}.</p>
+                  <p className="mt-3 inline-flex items-center gap-2 text-small font-semibold text-forest-900">
+                    <svg aria-hidden viewBox="0 0 24 24" className="h-4 w-4 text-bronze" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11Z" /><circle cx="12" cy="10" r="2.3" /></svg>
+                    {f.landmark.distance} of {f.landmark.name}
+                  </p>
                   <span className="mt-8 inline-flex items-center gap-3 text-[0.9375rem] font-semibold text-forest-900">
                     <span className="link-underline">View the project</span>
                     <svg aria-hidden viewBox="0 0 20 10" className="h-2.5 w-5 transition-transform duration-500 group-hover:translate-x-1.5" fill="none" stroke="currentColor" strokeWidth="1.25"><path d="M0 5h18M14 1l4 4-4 4" /></svg>
@@ -67,6 +72,8 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
           </div>
         </section>
       )}
+
+      {isFarm && <LandmarkFeature />}
 
       <section aria-labelledby="listings-h" className="section-y-sm">
         <div className="container-x">

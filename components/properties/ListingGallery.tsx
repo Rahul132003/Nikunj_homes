@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
+import { SmoothImage } from "@/components/ui/SmoothImage";
 import type { ListingImage } from "@/data/properties";
 import { cn } from "@/lib/cn";
 
@@ -34,7 +34,7 @@ export function ListingGallery({ slots }: { slots: ListingImage[] }) {
             transition={{ duration: 0.35 }}
             aria-live="polite"
           >
-            <div className="relative aspect-[16/10] overflow-hidden bg-ivory-200"><Image src={slots[i].src} alt={slots[i].alt} fill priority={i === 0} sizes="(min-width:1024px) 66vw, 100vw" className="object-cover" /></div>
+            <div className="relative aspect-[16/10] overflow-hidden bg-ivory-200"><SmoothImage src={slots[i].src} alt={slots[i].alt} fill priority={i === 0} sizes="(min-width:1024px) 66vw, 100vw" className="object-cover" /></div>
           </motion.div>
         </AnimatePresence>
         {(["prev", "next"] as const).map((d) => (
@@ -63,7 +63,7 @@ export function ListingGallery({ slots }: { slots: ListingImage[] }) {
               aria-current={idx === i}
               className={cn("block w-full border-2 transition-colors", idx === i ? "border-forest-900" : "border-transparent opacity-70 hover:opacity-100")}
             >
-              <span className="relative block aspect-[4/3] overflow-hidden"><Image src={s.src} alt="" fill sizes="20vw" className="object-cover" /></span>
+              <span className="relative block aspect-[4/3] overflow-hidden"><SmoothImage src={s.src} alt="" fill sizes="20vw" className="object-cover" /></span>
             </button>
           </li>
         ))}

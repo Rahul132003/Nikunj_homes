@@ -9,8 +9,9 @@ import { Eyebrow, Tbp } from "@/components/ui/Typography";
 import { Reveal, RuleReveal } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = buildMetadata({
-  title: "About Nikunj Homes",
-  description: company.description,
+  title: "About us: a Faridabad real estate firm",
+  description:
+    "Nikunj Homes is a Faridabad real estate firm buying and selling residential, commercial, industrial and farm house properties from its Sector 81 office.",
   path: "/about",
 });
 

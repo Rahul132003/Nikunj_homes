@@ -4,7 +4,6 @@ import { pgsGreens } from "@/data/projects";
 import { LazyPgsEnquiryForm } from "./LazyPgsEnquiryForm";
 import { Eyebrow, Heading } from "@/components/ui/Typography";
 import { Reveal } from "@/components/motion/Reveal";
-import { DeveloperContact } from "./DeveloperContact";
 
 export function PgsEnquirySection() {
   const f = pgsGreens;
@@ -26,14 +25,11 @@ export function PgsEnquirySection() {
           </Reveal>
         </div>
 
-        <div className="space-y-8 lg:col-span-7">
+        <div className="lg:col-span-7">
           <Reveal delay={0.1}>
             <div className="bg-ivory p-6 text-charcoal sm:p-10" style={{ ["--focus" as string]: "var(--color-forest-700)", ["--label" as string]: "var(--color-pgs-green)" }}>
               <LazyPgsEnquiryForm />
             </div>
-          </Reveal>
-          <Reveal delay={0.16}>
-            <div className="text-charcoal"><DeveloperContact /></div>
           </Reveal>
         </div>
       </div>

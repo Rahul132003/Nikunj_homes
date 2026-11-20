@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { categories, getCategory, getListing, listings } from "@/data/properties";
-import { buildMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, buildMetadata, listingJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/ui/JsonLd";
 import type { HeroKey } from "@/data/heroes";
 import { PageHero } from "@/components/layout/PageHero";
-import { ListingGallery } from "@/components/properties/ListingGallery";
+import { ListingBody, detailConfig } from "@/components/properties/ListingBody";
+import { ShortlistButton } from "@/components/properties/ShortlistButton";
 import { BuyInvestForm } from "@/components/forms/BuyInvestForm";
 import { LinkButton } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Typography";
@@ -29,17 +31,15 @@ export default async function ListingPage({ params }: { params: Promise<{ catego
   const c = getCategory(category);
   if (!l || !c) notFound();
 
-  const specs: [string, string][] = [
-    ["Property type", l.propertyType],
-    ["Location", l.location],
-    ["Area", l.area],
-    ["Price", l.price],
-    ["Availability", l.status],
-    ["Listing reference", l.reference],
-  ];
 
   return (
     <>
+      <JsonLd
+        data={[
+          breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Properties", path: "/properties" }, { name: c.title, path: `/properties/${c.slug}` }, { name: l.title, path: `/properties/${c.slug}/${l.slug}` }]),
+          ...(l.isTemplate ? [] : [listingJsonLd(l)]),
+        ]}
+      />
       <PageHero heroKey={c.slug as HeroKey}
         eyebrow={`${c.title} property`}
         title={l.title}
@@ -54,43 +54,17 @@ export default async function ListingPage({ params }: { params: Promise<{ catego
 
       <div className="container-x section-y-sm grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-8">
-          <ListingGallery slots={l.images} />
-
-          <section aria-labelledby="overview-h" className="mt-14">
-            <Eyebrow>Overview</Eyebrow>
-            <h2 id="overview-h" className="text-h3 mt-4 text-forest-900">About this property</h2>
-            <p className="mt-5 text-lead text-muted">{l.summary}</p>
-          </section>
-
-          <section aria-labelledby="specs-h" className="mt-14">
-            <h2 id="specs-h" className="text-h3 text-forest-900">Specifications</h2>
-            <dl className="mt-6 border-t border-hairline">
-              {specs.map(([k, v]) => (
-                <div key={k} className="grid grid-cols-[10rem_1fr] gap-4 border-b border-hairline py-4 text-[0.9375rem] sm:grid-cols-[14rem_1fr]">
-                  <dt className="text-muted">{k}</dt>
-                  <dd className="font-medium text-forest-900">{v}</dd>
-                </div>
-              ))}
-            </dl>
-          </section>
-
-          <section aria-labelledby="features-h" className="mt-14">
-            <h2 id="features-h" className="text-h3 text-forest-900">Features</h2>
-            <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-              {l.features.map((f) => (
-                <li key={f} className="flex items-center gap-3 border border-hairline bg-white px-5 py-4 text-[0.9375rem]"><span aria-hidden className="h-1.5 w-1.5 rotate-45 bg-bronze" />{f}</li>
-              ))}
-            </ul>
-          </section>
+          <ListingBody listing={l} />
         </div>
 
         <aside aria-label="Enquiry summary" className="lg:col-span-4">
           <div className="border border-forest-900/15 bg-white p-7 lg:sticky lg:top-28">
-            <p className="text-eyebrow text-label">{c.title}</p>
+            <p className="text-eyebrow text-label">{detailConfig[l.category].label}</p>
             <p className="mt-3 font-display text-[2.5rem] leading-none text-forest-900">{l.price}</p>
             <p className="mt-3 text-small text-muted">Ref: {l.reference}</p>
             <div className="mt-7 grid gap-3">
-              <LinkButton href="#enquire" arrow>Enquire about this property</LinkButton>
+              <LinkButton href="#enquire" arrow>{detailConfig[l.category].cta}</LinkButton>
+              <ShortlistButton category={l.category} slug={l.slug} title={l.title} withLabel className="w-full" />
               <LinkButton href="/sell" variant="outline">Sell a similar property</LinkButton>
             </div>
           </div>

@@ -87,6 +87,7 @@ export interface Listing {
 }
 
 const img = (path: string, alt: string): ListingImage => ({ src: `${IMG}/${path}`, alt: `Sample image: ${alt}` });
+const sample = (name: string, alt: string): ListingImage => ({ src: `/images/samples/${name}.webp`, alt: `Sample image: ${alt}` });
 const SAMPLE_NOTE = "Sample listing — illustrative only, not a real property.";
 
 export const listings: Listing[] = [
@@ -96,7 +97,7 @@ export const listings: Listing[] = [
     propertyType: "Residential — apartment", status: "Sample — ready to move", reference: "SAMPLE-RES-01",
     summary: `A bright three-bedroom apartment with a balcony on every floor plate, close to schools and the metro. ${SAMPLE_NOTE}`,
     features: ["3 bedrooms, 3 bathrooms", "Covered parking", "Lift and power backup", "Gated society with 24x7 security"],
-    images: [img("previous-projects/pgs-florence.webp", "a multi-storey apartment building"), img("previous-projects/delhi-residential.webp", "a residential block"), img("why/gated-society.webp", "a gated society entrance"), img("why/security-24x7.webp", "a security cabin")],
+    images: [sample("residential", "a modern apartment block with balconies"), img("previous-projects/pgs-florence.webp", "a multi-storey apartment building"), img("why/gated-society.webp", "a gated society entrance"), img("why/security-24x7.webp", "a security cabin")],
   },
   {
     slug: "sample-independent-floor", category: "residential", isTemplate: true,
@@ -120,7 +121,7 @@ export const listings: Listing[] = [
     propertyType: "Commercial — office", status: "Sample — available", reference: "SAMPLE-COM-02",
     summary: `A ready office floor in a managed commercial building, suited to a small firm or practice. ${SAMPLE_NOTE}`,
     features: ["Open floor plate", "Lift and power backup", "Visitor parking", "Reception area"],
-    images: [img("clubhouse/clubhouse-dusk-pool.webp", "a building at dusk"), img("clubhouse/dine-in.webp", "an interior space"), img("clubhouse/gym.webp", "a fitted interior"), img("why/clubhouse.webp", "a clubhouse")],
+    images: [sample("commercial", "glass office towers"), img("clubhouse/dine-in.webp", "an interior space"), img("clubhouse/gym.webp", "a fitted interior"), img("why/clubhouse.webp", "a clubhouse")],
   },
   {
     slug: "sample-industrial-plot", category: "industrial", isTemplate: true,
@@ -128,7 +129,7 @@ export const listings: Listing[] = [
     propertyType: "Industrial — plot", status: "Sample — available", reference: "SAMPLE-IND-01",
     summary: `A level industrial plot with wide road access, suited to manufacturing or storage. ${SAMPLE_NOTE}`,
     features: ["Wide approach road", "Regular shape", "Utility connections nearby", "Truck access"],
-    images: [img("why/wide-roads.webp", "a wide road"), img("features/solar-power.webp", "solar panels"), img("hero/cover-farmland.webp", "open land"), img("plan/layout-plan.webp", "a layout plan")],
+    images: [sample("industrial", "an industrial warehouse"), img("why/wide-roads.webp", "a wide road"), img("features/solar-power.webp", "solar panels"), img("hero/cover-farmland.webp", "open land")],
   },
   {
     slug: "sample-warehouse", category: "industrial", isTemplate: true,
@@ -136,7 +137,7 @@ export const listings: Listing[] = [
     propertyType: "Industrial — warehouse", status: "Sample — available", reference: "SAMPLE-IND-02",
     summary: `A covered warehouse with a loading bay and yard, close to the highway. ${SAMPLE_NOTE}`,
     features: ["Loading bay", "High clear height", "Yard for turning", "Highway access"],
-    images: [img("features/solar-power.webp", "solar panels"), img("why/wide-roads.webp", "a wide road"), img("why/security-24x7.webp", "a security cabin"), img("plan/layout-plan.webp", "a site plan")],
+    images: [sample("industrial", "a steel-clad warehouse"), img("features/solar-power.webp", "solar panels"), img("why/wide-roads.webp", "a wide road"), img("why/security-24x7.webp", "a security cabin")],
   },
   {
     slug: "sample-farm-house", category: "farm-houses", isTemplate: true,

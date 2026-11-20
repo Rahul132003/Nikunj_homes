@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useId, useRef, useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
 import { submitEnquiry, type SubmitResult } from "@/lib/submit";
+import { track } from "@/lib/analytics";
 import { schemas, type EnquiryKind } from "@/lib/validation";
 import { Button } from "@/components/ui/Button";
 import { legal } from "@/data/company";
@@ -64,6 +65,8 @@ export function useEnquiryForm(kind: EnquiryKind, initial: Values) {
     }
     setStatus("submitting");
     const res = await submitEnquiry(kind, values);
+    // Only the form name is sent to analytics - never what the visitor typed.
+    track(res.ok ? "Enquiry submitted" : "Enquiry failed", { form: kind });
     setResult(res);
     setStatus(res.ok ? "success" : "error");
   };
@@ -82,8 +85,10 @@ export function useEnquiryForm(kind: EnquiryKind, initial: Values) {
 /* ------------------------------- primitives ------------------------------ */
 
 const control =
-  "w-full rounded-[2px] border bg-white px-4 text-base text-charcoal placeholder:text-muted/80 transition-colors duration-300 " +
-  "focus-visible:border-forest-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus";
+  "w-full rounded-[2px] border bg-white px-4 text-[1.0625rem] text-charcoal placeholder:text-muted/70 " +
+  "shadow-[0_1px_0_rgb(0_0_0/0.03)] transition-[border-color,box-shadow,background-color] duration-300 " +
+  "hover:border-forest-900/45 focus-visible:border-forest-900 focus-visible:shadow-[0_0_0_4px_color-mix(in_srgb,var(--color-gold-400)_35%,transparent)] " +
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus";
 
 interface FieldShellProps {
   label: string;
@@ -103,9 +108,9 @@ export function Field({ label, name, error, hint, required, className, children 
   const describedBy = [hintId, errId].filter(Boolean).join(" ") || undefined;
   return (
     <div className={className}>
-      <label htmlFor={id} className="mb-2 block text-small font-semibold text-forest-900">
+      <label htmlFor={id} className="mb-2.5 block text-[0.75rem] font-semibold uppercase tracking-[0.1em] text-forest-900">
         {label}
-        {required ? <span aria-hidden className="text-error"> *</span> : <span className="ml-1.5 font-normal text-muted">(optional)</span>}
+        {required ? <span aria-hidden className="text-error"> *</span> : <span className="ml-2 font-normal normal-case tracking-normal text-muted">Optional</span>}
         {required && <span className="sr-only"> (required)</span>}
       </label>
       {children({ id, describedBy, invalid: !!error })}
@@ -142,7 +147,7 @@ export function TextField({
           id={id} name={name} type={type} value={value} onChange={onChange} onBlur={onBlur}
           autoComplete={autoComplete} inputMode={inputMode} placeholder={placeholder}
           aria-invalid={invalid || undefined} aria-describedby={describedBy} aria-required={required || undefined}
-          className={cn(control, "min-h-12", invalid ? "border-error" : "border-field-border")}
+          className={cn(control, "min-h-[3.5rem]", invalid ? "border-error" : "border-field-border")}
         />
       )}
     </Field>
@@ -177,7 +182,7 @@ export function SelectField({
           <select
             id={id} name={name} value={value} onChange={onChange} onBlur={onBlur}
             aria-invalid={invalid || undefined} aria-describedby={describedBy} aria-required={required || undefined}
-            className={cn(control, "min-h-12 appearance-none pr-11", invalid ? "border-error" : "border-field-border", !value && "text-muted")}
+            className={cn(control, "min-h-[3.5rem] appearance-none pr-11", invalid ? "border-error" : "border-field-border", !value && "text-muted")}
           >
             <option value="">{placeholder}</option>
             {options.map((o) => <option key={o} value={o}>{o}</option>)}
@@ -186,6 +191,25 @@ export function SelectField({
         </div>
       )}
     </Field>
+  );
+}
+
+/**
+ * A numbered group of fields ("01 Your details"). Renders a real <fieldset>/<legend> so assistive tech
+ * announces the group, with a quiet gold-ringed step number and a hairline that closes the heading.
+ */
+export function FormSection({ step, title, hint, children }: { step: string; title: string; hint?: string; children: ReactNode }) {
+  return (
+    <fieldset className="min-w-0 border-0 p-0">
+      <legend className="mb-7 flex w-full items-center gap-4 p-0">
+        <span aria-hidden className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-gold-500 font-display text-[1rem] text-forest-900 [font-variant-numeric:lining-nums]">{step}</span>
+        <span className="min-w-0">
+          <span className="block font-display text-[1.375rem] leading-tight text-forest-900">{title}</span>
+          {hint && <span className="mt-0.5 block text-small font-normal text-muted">{hint}</span>}
+        </span>
+      </legend>
+      <div className="space-y-6">{children}</div>
+    </fieldset>
   );
 }
 
@@ -206,7 +230,7 @@ export function ConsentField({
 }: { checked: boolean; onChange: (v: boolean) => void; error?: string; children: ReactNode }) {
   const id = useId();
   return (
-    <div>
+    <div className="border border-hairline bg-ivory-200 p-5">
       <div className="flex items-start gap-3">
         <input
           id={id} name="consent" type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)}
@@ -234,8 +258,8 @@ export function FormDisclaimer({ variant = "developer", className }: { variant?:
 
 export function SubmitRow({ status, label = "Send enquiry", error }: { status: Status; label?: string; error?: string }) {
   return (
-    <div className="flex flex-col gap-4">
-      <Button type="submit" size="lg" arrow disabled={status === "submitting"} aria-busy={status === "submitting"} className="w-full sm:w-auto">
+    <div className="flex flex-col gap-4 border-t border-hairline pt-8">
+      <Button type="submit" size="lg" arrow disabled={status === "submitting"} aria-busy={status === "submitting"} className="w-full sm:w-auto sm:min-w-[16rem]">
         {status === "submitting" ? "Sending…" : label}
       </Button>
       <div aria-live="polite" className="min-h-5">

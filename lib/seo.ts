@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { company, siteUrl } from "@/data/company";
 
 interface MetaInput {
-  title: string;
+  /** A string gets the site template ("Title | Nikunj Homes"); { absolute } is used exactly as written. */
+  title: string | { absolute: string };
   description: string;
   path: string;
   /** Absolute or root-relative OG image. Defaults to the generated brand card. */
@@ -13,6 +14,7 @@ interface MetaInput {
 /** Consistent metadata + Open Graph + Twitter for every route. */
 export function buildMetadata({ title, description, path, image, noindex }: MetaInput): Metadata {
   const url = new URL(path, siteUrl).toString();
+  const shown = typeof title === "string" ? `${title} | ${company.name}` : title.absolute;
   return {
     title,
     description,
@@ -22,14 +24,14 @@ export function buildMetadata({ title, description, path, image, noindex }: Meta
       type: "website",
       siteName: company.name,
       locale: "en_IN",
-      title: `${title} | ${company.name}`,
+      title: shown,
       description,
       url,
       images: image ? [{ url: image }] : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} | ${company.name}`,
+      title: shown,
       description,
       images: image ? [image] : undefined,
     },
@@ -58,6 +60,31 @@ export const organizationJsonLd = {
     addressCountry: company.address.country,
   },
 };
+
+export const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: company.name,
+  url: siteUrl,
+  inLanguage: "en-IN",
+};
+
+/**
+ * Listing structured data. Only for REAL listings (never samples). Price is deliberately not published
+ * ("Price on request"), so no offer/price is emitted.
+ */
+export function listingJsonLd(l: { title: string; summary: string; location: string; category: string; slug: string; images: { src: string }[] }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "RealEstateListing",
+    name: l.title,
+    description: l.summary,
+    url: new URL(`/properties/${l.category}/${l.slug}`, siteUrl).toString(),
+    image: l.images.map((i) => new URL(i.src, siteUrl).toString()),
+    contentLocation: { "@type": "Place", name: l.location },
+    provider: { "@type": "RealEstateAgent", name: company.name, url: siteUrl },
+  };
+}
 
 export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
   return {

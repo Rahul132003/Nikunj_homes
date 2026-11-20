@@ -48,8 +48,8 @@ export const pgsGreens = {
   descriptor: "Farmland by PGS Group",
   type: "Upcoming luxury farmhouse land development",
   /** Contact-page wording from the catalogue; the story page says “near the Noida-Faridabad border”. */
-  locationLine: "Motipur, Greater Noida, Uttar Pradesh",
-  locationAlt: "Motipur, near the Noida-Faridabad border",
+  locationLine: "Motipur, Manjhawali, Greater Noida, Uttar Pradesh",
+  locationAlt: "Motipur, Manjhawali, near the Noida-Faridabad border",
   area: { value: 55, unit: "acres" },
 
   heroKicker: "Farmland by PGS Group",
@@ -58,7 +58,7 @@ export const pgsGreens = {
     "A destination with a sense of deep contentment settling into a relaxing rhythm that pleases mind, body and soul.",
 
   story: [
-    "PGS Greens, situated in Motipur, Greater Noida, is an upcoming luxury farmhouse land development project spread across 55 acres.",
+    "PGS Greens, situated in Motipur, Manjhawali, Greater Noida, is an upcoming luxury farmhouse land development project spread across 55 acres.",
     "This project is designed to offer residents an exclusive escape from the city’s hustle-bustle while still being close to all the modern amenities. It provides an incredible opportunity to acquire spacious plots ideal for constructing luxurious villas and farmhouses.",
     "With its prime location and ample space, PGS Greens is a promising destination for those seeking to build their dream homes in a prestigious and well-connected area.",
     "At PGS Greens, every aspect of your living experience has been meticulously planned and executed, from the design of the farmhouses/agricultural land to the layout of the entire project.",
@@ -139,6 +139,19 @@ export const pgsGreens = {
   ] satisfies LocationHighlight[],
   locationMap: { src: `${IMG}/location/location-map-2026-11.webp`, alt: "Schematic location map showing PGS GREENS at Motipur beside Kamakhya Devi Temple, with Amrita Hospital to the north, the Yamuna River below, and the Yamuna Expressway, Gautam Buddha University and Pari Chowk to the south", width: 1700, height: 1449 },
   locationAttribution: "As per developer. Schematic map, not to scale.",
+
+  /** Nearby landmark used to explain where the property is. Walking distance is the developer's statement. */
+  landmark: {
+    name: "Kamakhya Devi Temple",
+    distance: "Walking distance",
+    image: {
+      src: `${IMG}/location/kamakhya-devi-temple-landmark.webp`,
+      alt: "Extract of the developer’s location map: Kamakhya Devi Temple beside PGS Farm and PGS GREENS, with SRS Farm and Village Bhupani nearby",
+      width: 1400,
+      height: 715,
+    },
+    attribution: "Extract of the developer’s schematic map, not to scale.",
+  },
 
   previousProjects: [
     {

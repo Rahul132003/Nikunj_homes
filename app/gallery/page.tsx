@@ -4,8 +4,9 @@ import { PageHero } from "@/components/layout/PageHero";
 import { GalleryBrowser } from "@/components/gallery/GalleryBrowser";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Gallery",
-  description: "Images of PGS GREENS, a featured project by PGS Group, from the developer’s catalogue.",
+  title: "PGS GREENS photo gallery",
+  description:
+    "Photographs of PGS GREENS, a featured project by PGS Group: the clubhouse, nature-inspired streets and amenities, from the developer’s catalogue.",
   path: "/gallery",
 });
 

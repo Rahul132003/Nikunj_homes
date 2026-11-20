@@ -27,8 +27,6 @@ interface RelationshipConfig {
   label: string;
   /** Paragraph shown on the PGS GREENS page and in the footer. */
   disclaimer: string;
-  /** Intro line above the developer-contact toggle. */
-  developerContactIntro: string;
   /** Whether enquiries are described as handled by Nikunj Homes. */
   nikunjHandlesEnquiries: boolean;
 }
@@ -38,22 +36,16 @@ export const pgsRelationshipConfig: Record<PgsRelationship, RelationshipConfig> 
     label: "Featured project by PGS Group",
     disclaimer:
       "PGS GREENS is a project by PGS Group, featured here for information. Project details, images and specifications are taken from the developer’s catalogue and are subject to change.",
-    developerContactIntro:
-      "These are the developer’s own contact details, shown for reference. They are not Nikunj Homes’ contact details.",
     nikunjHandlesEnquiries: false,
   },
   "channel-partner": {
     label: tbp("Relationship label – e.g. authorised channel partner, wording to be confirmed"),
     disclaimer: tbp("Channel-partner disclaimer wording"),
-    developerContactIntro:
-      "These are the developer’s own contact details, shown for reference. They are not Nikunj Homes’ contact details.",
     nikunjHandlesEnquiries: true,
   },
   "marketing-partner": {
     label: tbp("Relationship label – e.g. marketing partner, wording to be confirmed"),
     disclaimer: tbp("Marketing-partner disclaimer wording"),
-    developerContactIntro:
-      "These are the developer’s own contact details, shown for reference. They are not Nikunj Homes’ contact details.",
     nikunjHandlesEnquiries: true,
   },
 };
@@ -61,29 +53,7 @@ export const pgsRelationshipConfig: Record<PgsRelationship, RelationshipConfig> 
 export const pgsRelationship = pgsRelationshipConfig[PGS_RELATIONSHIP];
 
 /* ------------------------------------------------------------------ */
-/* 2. Developer contact block (PGS Infracon) — PGS GREENS page ONLY   */
-/* ------------------------------------------------------------------ */
-
-export const developerContact = {
-  /** Labelled everywhere as the developer's, never Nikunj Homes'. */
-  heading: "Developer’s contact details",
-  name: "PGS Infracon Pvt. Ltd.",
-  address: "Ganesh Nagar, New Delhi-110018",
-  phone: "+91 93124 44491",
-  phoneHref: "tel:+919312444491",
-  /**
-   * The phone number was read from the catalogue image (page 14), printed as
-   * "+919312444491". ▶ VERIFY against the original before launch, then set true.
-   */
-  phoneVerified: false,
-  website: "www.pgsgroup.co.in",
-  websiteHref: "https://www.pgsgroup.co.in",
-  email: "info@pgsgroup.co.in",
-  emailHref: "mailto:info@pgsgroup.co.in",
-} as const;
-
-/* ------------------------------------------------------------------ */
-/* 3. Nikunj Homes                                                    */
+/* 2. Nikunj Homes                                                   */
 /* ------------------------------------------------------------------ */
 
 export const company = {
@@ -96,33 +66,34 @@ export const company = {
     "Buying and selling residential, commercial, industrial and farm house properties from Faridabad, Delhi-NCR.",
 
   address: {
-    line1: "A3, Block-B, BPTP, Sector-81",
+    line1: "A3, Block-B, BPTP District, Sector 81",
     city: "Faridabad",
     state: "Haryana",
-    postalCode: "121001",
+    postalCode: "121004",
     country: "IN",
     /** Single line for footers and contact blocks. */
-    full: "A3, Block-B, BPTP, Sector-81, Faridabad, Haryana-121001",
+    full: "A3, Block-B, BPTP District, Sector 81, Faridabad, Haryana-121004",
   },
 
   /**
    * Phone, email and address are from the "Contact Us" page of the Nikunj Homes PGS Greens PDF.
-   * Hours were not supplied: placeholder only.
+   * Office hours as supplied by the client (days of the week were not specified).
    */
   contact: {
     phone: "+91 93540 07418",
     phoneHref: "tel:+919354007418" as string | null,
     email: "nikunjhomesdevelopers@gmail.com",
     emailHref: "mailto:nikunjhomesdevelopers@gmail.com" as string | null,
-    hours: tbp("Office hours"),
+    /** Days were not specified, so none are stated. */
+    hours: "9:30 AM – 5:30 PM",
   },
 
   /**
-   * WhatsApp click-to-chat. Put digits only, with country code, e.g. "919XXXXXXXXX".
-   * While empty, the floating button shows the placeholder instead of opening a chat.
+   * WhatsApp click-to-chat. Digits only, with country code. WhatsApp uses the same number as the office
+   * phone (confirmed by the client). If it is ever emptied, the floating button falls back to the placeholder.
    */
   whatsapp: {
-    number: "",
+    number: "919354007418",
     placeholder: tbp("WhatsApp number"),
     defaultMessage: "Hello Nikunj Homes, I would like to enquire about a property.",
   },

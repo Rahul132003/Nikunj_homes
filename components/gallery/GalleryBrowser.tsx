@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { SmoothImage } from "@/components/ui/SmoothImage";
 import { useMemo, useState } from "react";
 import { legal } from "@/data/company";
 import { pgsGreens, type ProjectImage } from "@/data/projects";
@@ -35,12 +35,31 @@ const tabs: { id: Tab; label: string }[] = [
   { id: "nikunj", label: "Nikunj Homes" },
 ];
 
+/** Editorial rhythm: wide + narrow, narrow + wide, then an even pair (desktop); one column on phones. */
+const SPANS = [
+  { col: "md:col-span-8", h: "h-[19rem] sm:h-[24rem] md:h-[30rem]", sizes: "(min-width:768px) 66vw, 95vw" },
+  { col: "md:col-span-4", h: "h-[19rem] sm:h-[24rem] md:h-[30rem]", sizes: "(min-width:768px) 33vw, 95vw" },
+  { col: "md:col-span-4", h: "h-[19rem] sm:h-[24rem] md:h-[30rem]", sizes: "(min-width:768px) 33vw, 95vw" },
+  { col: "md:col-span-8", h: "h-[19rem] sm:h-[24rem] md:h-[30rem]", sizes: "(min-width:768px) 66vw, 95vw" },
+  { col: "md:col-span-6", h: "h-[19rem] sm:h-[24rem] md:h-[28rem]", sizes: "(min-width:768px) 50vw, 95vw" },
+  { col: "md:col-span-6", h: "h-[19rem] sm:h-[24rem] md:h-[28rem]", sizes: "(min-width:768px) 50vw, 95vw" },
+] as const;
+
+/** Small source images (catalogue thumbnails) are never blown up to a wide tile: they sit three to a row. */
+const SMALL = { col: "md:col-span-4", h: "h-[19rem] sm:h-[22rem] md:h-[24rem]", sizes: "(min-width:768px) 33vw, 95vw" } as const;
+
 const nikunjSlots = ["Nikunj Homes office exterior", "Nikunj Homes team", "Residential property photo", "Commercial property photo", "Industrial property photo", "Farm house property photo"];
 
 export function GalleryBrowser() {
   const [tab, setTab] = useState<Tab>("all");
   const [open, setOpen] = useState<number | null>(null);
   const shown = useMemo(() => (tab === "all" ? items : items.filter((i) => i.tab === tab)), [tab]);
+
+  // wide/narrow rhythm is assigned to full-size photographs only
+  const tiles = useMemo(() => {
+    let k = 0;
+    return shown.map((im) => ({ im, span: im.width < 700 ? SMALL : SPANS[k++ % SPANS.length] }));
+  }, [shown]);
 
   return (
     <div>
@@ -72,20 +91,44 @@ export function GalleryBrowser() {
             </ul>
           </>
         ) : (
-          <ul className="columns-1 gap-4 sm:columns-2 lg:columns-3 [&>li]:mb-4 [&>li]:break-inside-avoid">
-            {shown.map((im, idx) => (
-              <li key={im.src}>
-                <Reveal>
-                  <button type="button" onClick={() => setOpen(idx)} aria-label={`Open image: ${im.caption}`} className="group relative block w-full overflow-hidden bg-forest-900/10">
-                    <Image src={im.src} alt={im.alt} width={im.width} height={im.height} sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 95vw" className="h-auto w-full transition-transform duration-[1400ms] ease-out group-hover:scale-105" />
-                    <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-forest-950/70 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100" />
-                    <span className="absolute bottom-3 left-4 font-display text-[1.5rem] leading-none text-ivory opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100">{im.caption}</span>
-                  </button>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
-        )}
+          <ul className={cn("grid gap-4 sm:gap-6", tab === "plan" ? "grid-cols-1" : "grid-cols-1 md:grid-cols-12")}>
+            {tiles.map(({ im, span }, idx) => {
+              const wide = tab === "plan";
+              return (
+                <li key={im.src} className={cn(!wide && span.col)}>
+                  <Reveal className="h-full">
+                    <button
+                      type="button"
+                      onClick={() => setOpen(idx)}
+                      aria-label={`Open image: ${im.caption}`}
+                      className={cn("group relative block w-full overflow-hidden bg-forest-900/10", !wide && span.h)}
+                      style={wide ? { aspectRatio: `${im.width} / ${im.height}` } : undefined}
+                    >
+                      <SmoothImage
+                        src={im.src}
+                        alt={im.alt}
+                        fill
+                        sizes={wide ? "(min-width:1280px) 1100px, 95vw" : span.sizes}
+                        className={cn(wide ? "object-contain" : "object-cover", "transition-transform duration-[1800ms] ease-out group-hover:scale-[1.04] motion-reduce:transition-none")}
+                      />
+                      {/* caption bar: always legible, lifts on hover */}
+                      <span aria-hidden className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-forest-950/80 via-forest-950/25 to-transparent" />
+                      <span className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 text-left sm:p-7">
+                        <span>
+                          {/* decorative index drawn with CSS content, so it is not part of the button's text */}
+                          <span aria-hidden data-n={String(idx + 1).padStart(2, "0")} className="block font-display text-[0.9375rem] text-gold-400 [font-variant-numeric:lining-nums] before:content-[attr(data-n)]" />
+                          <span className="mt-1 block font-display text-[1.5rem] leading-tight text-ivory sm:text-[1.875rem]">{im.caption}</span>
+                        </span>
+                        <span aria-hidden className="grid h-11 w-11 shrink-0 translate-y-2 place-items-center rounded-full bg-gold-400 text-forest-950 opacity-0 transition-[transform,opacity] duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none">
+                          <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 3h5v5M17 3l-6 6M8 4H4v12h12v-4" /></svg>
+                        </span>
+                      </span>
+                    </button>
+                  </Reveal>
+                </li>
+              );
+            })}
+          </ul>        )}
       </div>
 
       <p className="mt-8 text-small text-muted">{legal.cataloguePhotographyNote}</p>

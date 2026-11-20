@@ -4,15 +4,15 @@ import { buildMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/layout/PageHero";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { mapsUrl } from "@/components/home/OfficeBand";
-import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
+import { OfficeMap } from "@/components/ui/OfficeMap";
 import { LinkButton } from "@/components/ui/Button";
 import { ContactValue } from "@/components/ui/ContactValue";
 import { Eyebrow } from "@/components/ui/Typography";
 import { Reveal } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Contact",
-  description: `Contact Nikunj Homes at ${company.address.full}.`,
+  title: "Contact us: Sector 81, Faridabad",
+  description: `Call ${company.contact.phone}, email or visit Nikunj Homes at ${company.address.full}. Send an enquiry and we’ll respond.`,
   path: "/contact",
 });
 
@@ -41,13 +41,17 @@ export default function ContactPage() {
                   ["Phone", company.contact.phone, company.contact.phoneHref],
                   ["Email", company.contact.email, company.contact.emailHref],
                   ["Hours", company.contact.hours, null],
-                  ["WhatsApp", company.whatsapp.placeholder, null],
+                  [
+                    "WhatsApp",
+                    company.whatsapp.number ? company.contact.phone : company.whatsapp.placeholder,
+                    company.whatsapp.number ? `https://wa.me/${company.whatsapp.number}?text=${encodeURIComponent(company.whatsapp.defaultMessage)}` : null,
+                  ],
                 ] as const).map(([k, v, href]) => (
                   <div key={k} className="grid grid-cols-[6rem_1fr] gap-4 py-4"><dt className="text-eyebrow text-bronze">{k}</dt><dd className="break-words"><ContactValue text={v} href={href} /></dd></div>
                 ))}
               </dl>
             </Reveal>
-            <Reveal delay={0.14}><ImagePlaceholder label="Embedded map or office photo – to be provided" ratio="16 / 10" className="text-forest-700" /></Reveal>
+            <Reveal delay={0.14}><OfficeMap /></Reveal>
           </div>
           <Reveal className="lg:col-span-7"><div className="border border-forest-900/10 bg-white p-6 sm:p-10"><ContactForm /></div></Reveal>
         </div>

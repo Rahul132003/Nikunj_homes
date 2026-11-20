@@ -5,6 +5,7 @@ import { heroes } from "@/data/heroes";
 import { pgsGreens } from "@/data/projects";
 import { LinkButton } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Typography";
+import { Parallax } from "@/components/motion/Parallax";
 
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
@@ -18,15 +19,17 @@ export function HomeHero() {
     <section className="surface-dark grain relative isolate flex min-h-[100svh] flex-col overflow-hidden">
       {/* depth layers */}
       {/* a real Nikunj Homes photo in company.heroImage wins; otherwise the stand-in from data/heroes.ts */}
-      <Image
-        src={company.heroImage ?? heroes.home.src}
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="-z-30 object-cover"
-        style={{ objectPosition: heroes.home.position }}
-      />
+      <Parallax className="absolute inset-0 -z-30" amount={4} scale={1.1}>
+        <Image
+          src={company.heroImage ?? heroes.home.src}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+          style={{ objectPosition: heroes.home.position }}
+        />
+      </Parallax>
       <div aria-hidden className="absolute inset-0 -z-20" style={{ background: "linear-gradient(90deg, color-mix(in srgb, var(--color-forest-950) 90%, transparent) 0%, color-mix(in srgb, var(--color-forest-950) 68%, transparent) 48%, color-mix(in srgb, var(--color-forest-950) 35%, transparent) 100%)" }} />
       <div aria-hidden className="absolute inset-0 -z-20 bg-[radial-gradient(120%_80%_at_85%_10%,var(--color-forest-700)_0%,transparent_55%),radial-gradient(90%_70%_at_0%_100%,var(--color-forest-800)_0%,transparent_60%)] opacity-50 mix-blend-multiply" />
       <div aria-hidden className="anim-drift absolute -left-[15%] top-[8%] -z-10 h-[75vmin] w-[75vmin] rounded-full bg-forest-600/25 blur-[110px]" />

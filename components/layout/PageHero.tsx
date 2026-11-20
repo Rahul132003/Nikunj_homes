@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { heroes, isLowRes, type HeroKey } from "@/data/heroes";
 import { Eyebrow } from "@/components/ui/Typography";
+import { Parallax } from "@/components/motion/Parallax";
 
 interface Crumb { label: string; href?: string }
 
@@ -41,15 +42,18 @@ export function PageHero({
     >
       {img ? (
         <>
-          <Image
-            src={img.src}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className={isLowRes(img) ? "-z-30 scale-[1.06] object-cover blur-[3px]" : "-z-30 object-cover"}
-            style={{ objectPosition: img.position }}
-          />
+          {/* soft scroll parallax (transform only; off with reduced motion) */}
+          <Parallax className="absolute inset-0 -z-30" amount={4} scale={1.1}>
+            <Image
+              src={img.src}
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className={isLowRes(img) ? "scale-[1.06] object-cover blur-[3px]" : "object-cover"}
+              style={{ objectPosition: img.position }}
+            />
+          </Parallax>
           {/* legibility overlays: left-to-right for the text column, bottom-up to seat the content */}
           <div aria-hidden className="absolute inset-0 -z-20" style={{ background: `linear-gradient(90deg, ${tint(Math.min(o + 0.2, 0.95))} 0%, ${tint(o)} 45%, ${tint(Math.max(o - 0.3, 0.25))} 100%)` }} />
           <div aria-hidden className="absolute inset-0 -z-20 bg-gradient-to-t from-forest-950/70 via-transparent to-forest-950/40" />

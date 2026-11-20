@@ -283,6 +283,25 @@ img { -webkit-user-drag: none; }
 .anim-cue { animation: cue 2.4s ease-in-out infinite; }
 .anim-ping { animation: ping-ring 1.8s ease-out infinite; }
 
+.page-enter { animation: fade-in 0.35s ease-out both; }
+
+/* Image / content skeleton: a soft tint with a slow highlight sweep (transform only). */
+@keyframes skeleton-sweep {
+  from { transform: translate3d(-100%, 0, 0); }
+  to   { transform: translate3d(100%, 0, 0); }
+}
+.skeleton {
+  overflow: hidden;
+  background: color-mix(in srgb, var(--color-forest-900) 7%, var(--color-ivory));
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-ivory) 70%, transparent), transparent);
+  animation: skeleton-sweep 1.8s ease-in-out infinite;
+}
+
 /* Honour reduced motion globally: no transforms, no parallax, no loops */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -295,6 +314,8 @@ img { -webkit-user-drag: none; }
   .anim-rise, .anim-fade { opacity: 1; animation: none; }
   .anim-line-y, .anim-line-x { transform: none; animation: none; }
   .anim-drift, .anim-cue, .anim-ping { animation: none; }
+  .skeleton::after { animation: none; display: none; }
+  .page-enter { animation: none; }
 }
 
 /* Screen-reader only */
