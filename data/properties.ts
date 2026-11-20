@@ -92,7 +92,7 @@ const SAMPLE_NOTE = "Sample listing — illustrative only, not a real property."
 export const listings: Listing[] = [
   {
     slug: "sample-3bhk-apartment", category: "residential", isTemplate: true,
-    title: "Sample: 3 BHK apartment", location: "Sector [xx], Faridabad (sample)", price: "₹ 85 Lakh (sample)", area: "1,450 sq ft (sample)",
+    title: "Sample: 3 BHK apartment", location: "Sector [xx], Faridabad (sample)", price: "Price on request", area: "1,450 sq ft (sample)",
     propertyType: "Residential — apartment", status: "Sample — ready to move", reference: "SAMPLE-RES-01",
     summary: `A bright three-bedroom apartment with a balcony on every floor plate, close to schools and the metro. ${SAMPLE_NOTE}`,
     features: ["3 bedrooms, 3 bathrooms", "Covered parking", "Lift and power backup", "Gated society with 24x7 security"],
@@ -100,7 +100,7 @@ export const listings: Listing[] = [
   },
   {
     slug: "sample-independent-floor", category: "residential", isTemplate: true,
-    title: "Sample: Independent builder floor", location: "Sector [xx], Faridabad (sample)", price: "₹ 1.2 Crore (sample)", area: "1,800 sq ft (sample)",
+    title: "Sample: Independent builder floor", location: "Sector [xx], Faridabad (sample)", price: "Price on request", area: "1,800 sq ft (sample)",
     propertyType: "Residential — builder floor", status: "Sample — under construction", reference: "SAMPLE-RES-02",
     summary: `A four-bedroom independent floor on a quiet residential street. ${SAMPLE_NOTE}`,
     features: ["4 bedrooms, 4 bathrooms", "Stilt parking", "Terrace access", "Wide approach road"],
@@ -108,7 +108,7 @@ export const listings: Listing[] = [
   },
   {
     slug: "sample-shop-showroom", category: "commercial", isTemplate: true,
-    title: "Sample: Ground-floor showroom", location: "Main market, Faridabad (sample)", price: "₹ 2.4 Crore (sample)", area: "900 sq ft (sample)",
+    title: "Sample: Ground-floor showroom", location: "Main market, Faridabad (sample)", price: "Price on request", area: "900 sq ft (sample)",
     propertyType: "Commercial — showroom", status: "Sample — available", reference: "SAMPLE-COM-01",
     summary: `A road-facing ground-floor showroom with high footfall, suited to retail or a branded outlet. ${SAMPLE_NOTE}`,
     features: ["Road-facing frontage", "Double-height ceiling", "Dedicated parking", "Power backup"],
@@ -116,7 +116,7 @@ export const listings: Listing[] = [
   },
   {
     slug: "sample-office-space", category: "commercial", isTemplate: true,
-    title: "Sample: Office space", location: "Business district, Faridabad (sample)", price: "₹ 1.1 Crore (sample)", area: "1,200 sq ft (sample)",
+    title: "Sample: Office space", location: "Business district, Faridabad (sample)", price: "Price on request", area: "1,200 sq ft (sample)",
     propertyType: "Commercial — office", status: "Sample — available", reference: "SAMPLE-COM-02",
     summary: `A ready office floor in a managed commercial building, suited to a small firm or practice. ${SAMPLE_NOTE}`,
     features: ["Open floor plate", "Lift and power backup", "Visitor parking", "Reception area"],
@@ -124,7 +124,7 @@ export const listings: Listing[] = [
   },
   {
     slug: "sample-industrial-plot", category: "industrial", isTemplate: true,
-    title: "Sample: Industrial plot", location: "Industrial area, Faridabad (sample)", price: "₹ 3.8 Crore (sample)", area: "1,000 sq yd (sample)",
+    title: "Sample: Industrial plot", location: "Industrial area, Faridabad (sample)", price: "Price on request", area: "1,000 sq yd (sample)",
     propertyType: "Industrial — plot", status: "Sample — available", reference: "SAMPLE-IND-01",
     summary: `A level industrial plot with wide road access, suited to manufacturing or storage. ${SAMPLE_NOTE}`,
     features: ["Wide approach road", "Regular shape", "Utility connections nearby", "Truck access"],
@@ -132,7 +132,7 @@ export const listings: Listing[] = [
   },
   {
     slug: "sample-warehouse", category: "industrial", isTemplate: true,
-    title: "Sample: Warehouse unit", location: "Logistics belt, Faridabad (sample)", price: "₹ 5.5 Crore (sample)", area: "12,000 sq ft (sample)",
+    title: "Sample: Warehouse unit", location: "Logistics belt, Faridabad (sample)", price: "Price on request", area: "12,000 sq ft (sample)",
     propertyType: "Industrial — warehouse", status: "Sample — available", reference: "SAMPLE-IND-02",
     summary: `A covered warehouse with a loading bay and yard, close to the highway. ${SAMPLE_NOTE}`,
     features: ["Loading bay", "High clear height", "Yard for turning", "Highway access"],
@@ -140,7 +140,7 @@ export const listings: Listing[] = [
   },
   {
     slug: "sample-farm-house", category: "farm-houses", isTemplate: true,
-    title: "Sample: Farm house with orchard", location: "Faridabad outskirts (sample)", price: "₹ 2.9 Crore (sample)", area: "1 acre (sample)",
+    title: "Sample: Farm house with orchard", location: "Faridabad outskirts (sample)", price: "Price on request", area: "1 acre (sample)",
     propertyType: "Farm house", status: "Sample — available", reference: "SAMPLE-FARM-01",
     summary: `A farm house on landscaped land with fruit trees and a separate guest cottage. ${SAMPLE_NOTE}`,
     features: ["Orchard and lawn", "Guest cottage", "Borewell", "Boundary wall and gate"],
@@ -148,7 +148,7 @@ export const listings: Listing[] = [
   },
   {
     slug: "sample-farmland-plot", category: "farm-houses", isTemplate: true,
-    title: "Sample: Farmhouse land", location: "Faridabad outskirts (sample)", price: "₹ 1.4 Crore (sample)", area: "2,000 sq yd (sample)",
+    title: "Sample: Farmhouse land", location: "Faridabad outskirts (sample)", price: "Price on request", area: "2,000 sq yd (sample)",
     propertyType: "Farmhouse land", status: "Sample — available", reference: "SAMPLE-FARM-02",
     summary: `Open farmhouse land on a tree-lined road, ready for you to build. ${SAMPLE_NOTE}`,
     features: ["Road frontage", "Flat, usable land", "Power connection nearby", "Green surroundings"],

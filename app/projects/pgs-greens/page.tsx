@@ -62,7 +62,7 @@ export default function PgsGreensPage() {
               <Reveal delay={0.08}><Heading id="layout-heading" className="mt-6 text-forest-900">Find your plot.</Heading></Reveal>
             </div>
             <Reveal delay={0.12} className="lg:col-span-5">
-              <p className="text-muted">The developer’s layout plan, made explorable. Select a plot to see its details — size, price and availability will appear once supplied.</p>
+              <p className="text-muted">The developer’s layout plan, made explorable. Select a plot to see its details — size and availability will appear once supplied. Price is on request.</p>
             </Reveal>
           </div>
           <Reveal delay={0.1} className="mt-12"><PlanViewer /></Reveal>

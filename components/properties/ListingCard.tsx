@@ -22,7 +22,7 @@ export function ListingCard({ listing }: { listing: Listing }) {
         <dl className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-hairline pt-5 text-small">
           <div><dt className="text-muted">Location</dt><dd className="mt-0.5 text-charcoal">{listing.location}</dd></div>
           <div><dt className="text-muted">Area</dt><dd className="mt-0.5 text-charcoal">{listing.area}</dd></div>
-          <div className="col-span-2"><dt className="text-muted">Price</dt><dd className="mt-0.5 font-semibold text-forest-900">{listing.price}</dd></div>
+          <div className="col-span-2"><dt className="sr-only">Price</dt><dd className="font-semibold text-forest-900">{listing.price}</dd></div>
         </dl>
         <span className="mt-6 inline-flex items-center gap-3 text-[0.875rem] font-semibold text-forest-900">
           <span className="link-underline">View details</span>

@@ -96,21 +96,24 @@ export const company = {
     "Buying and selling residential, commercial, industrial and farm house properties from Faridabad, Delhi-NCR.",
 
   address: {
-    line1: "A3, BPTP, Sector-81",
+    line1: "A3, Block-B, BPTP, Sector-81",
     city: "Faridabad",
     state: "Haryana",
     postalCode: "121001",
     country: "IN",
     /** Single line for footers and contact blocks. */
-    full: "A3, BPTP, Sector-81, Faridabad, Haryana-121001",
+    full: "A3, Block-B, BPTP, Sector-81, Faridabad, Haryana-121001",
   },
 
-  /** Nothing below was supplied. Placeholders only. */
+  /**
+   * Phone, email and address are from the "Contact Us" page of the Nikunj Homes PGS Greens PDF.
+   * Hours were not supplied: placeholder only.
+   */
   contact: {
-    phone: tbp("Nikunj Homes phone"),
-    phoneHref: null as string | null,
-    email: tbp("Nikunj Homes email"),
-    emailHref: null as string | null,
+    phone: "+91 93540 07418",
+    phoneHref: "tel:+919354007418" as string | null,
+    email: "nikunjhomesdevelopers@gmail.com",
+    emailHref: "mailto:nikunjhomesdevelopers@gmail.com" as string | null,
     hours: tbp("Office hours"),
   },
 

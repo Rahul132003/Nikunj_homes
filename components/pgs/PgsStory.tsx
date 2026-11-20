@@ -16,7 +16,7 @@ export function PgsStory() {
     ["Location", f.locationLine],
     ["Type", f.type],
     ["Plot sizes", <Tbp key="s">{f.missing.plotSizes}</Tbp>],
-    ["Prices", <Tbp key="p">{f.missing.prices}</Tbp>],
+    ["Price", "Price on request"],
     ["Possession", <Tbp key="d">{f.missing.possession}</Tbp>],
     ["RERA / approvals", <Tbp key="r">{f.missing.rera}</Tbp>],
   ];

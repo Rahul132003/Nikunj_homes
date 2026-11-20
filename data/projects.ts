@@ -32,8 +32,9 @@ export interface ProjectImage {
 export interface LocationHighlight {
   id: string;
   place: string;
-  minutes: number;
-  mode: "drive" | "unspecified";
+  /** null when the catalogue gives no time (e.g. "walking distance"). */
+  minutes: number | null;
+  mode: "drive" | "unspecified" | "walking";
   /** "proposed" items MUST keep this flag and be labelled so in the UI. */
   status: "existing" | "proposed";
   note?: string;
@@ -127,6 +128,7 @@ export const pgsGreens = {
    * figure remains the developer's. ▶ Confirm this wording with PGS.
    */
   locationHighlights: [
+    { id: "kamakhya", place: "Kamakhya Devi Temple", minutes: null, mode: "walking", status: "existing" },
     { id: "buddh", place: "Buddh International Circuit", minutes: 10, mode: "drive", status: "existing" },
     { id: "gbu", place: "Gautam Buddha University", minutes: 10, mode: "drive", status: "existing" },
     { id: "pari", place: "Pari Chowk", minutes: 20, mode: "drive", status: "existing" },
@@ -135,7 +137,7 @@ export const pgsGreens = {
     { id: "amrita", place: "Amrita Hospital, Faridabad", minutes: 15, mode: "unspecified", status: "existing" },
     { id: "epe", place: "Eastern Peripheral Highway", minutes: 10, mode: "unspecified", status: "existing" },
   ] satisfies LocationHighlight[],
-  locationMap: { src: `${IMG}/location/location-map.webp`, alt: "Schematic location map showing PGS GREENS at Motipur between Mathura Road, the Yamuna River and the Yamuna Expressway", width: 1646, height: 1501 },
+  locationMap: { src: `${IMG}/location/location-map-2026-11.webp`, alt: "Schematic location map showing PGS GREENS at Motipur beside Kamakhya Devi Temple, with Amrita Hospital to the north, the Yamuna River below, and the Yamuna Expressway, Gautam Buddha University and Pari Chowk to the south", width: 1700, height: 1449 },
   locationAttribution: "As per developer. Schematic map, not to scale.",
 
   previousProjects: [
@@ -193,6 +195,7 @@ export const projects = [pgsGreens] as const;
 export type Project = (typeof projects)[number];
 
 export function formatDriveTime(h: LocationHighlight) {
+  if (h.minutes === null) return "Walking distance";
   const base = `${h.minutes} min`;
   return h.mode === "drive" ? `${base} drive` : base;
 }

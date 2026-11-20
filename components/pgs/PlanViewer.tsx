@@ -359,7 +359,7 @@ export function PlanViewer() {
                   {([["Size", details.size], ["Price", details.price], ["Status", details.status]] as const).map(([k, v]) => (
                     <div key={k} className="grid grid-cols-[4.5rem_1fr] gap-3 py-3">
                       <dt className="text-muted">{k}</dt>
-                      <dd><Tbp>{v}</Tbp></dd>
+                      <dd>{k === "Price" ? <span className="font-semibold text-forest-900">{v}</span> : <Tbp>{v}</Tbp>}</dd>
                     </div>
                   ))}
                 </dl>
@@ -375,7 +375,7 @@ export function PlanViewer() {
             ) : (
               <div className="border border-dashed border-forest-900/25 p-6 text-[0.9375rem] text-muted">
                 <p className="font-display text-[1.75rem] leading-tight text-forest-900">No plot selected</p>
-                <p className="mt-3">Select a number on the plan, or search above. Size, price and status will show here once PGS Group provides them.</p>
+                <p className="mt-3">Select a number on the plan, or search above. Size and status will show here once PGS Group provides them. Price is on request.</p>
               </div>
             )}
           </div>

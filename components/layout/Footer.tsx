@@ -2,7 +2,7 @@ import Link from "next/link";
 import { company } from "@/data/company";
 import { footerNav } from "@/data/navigation";
 import { Wordmark } from "./Wordmark";
-import { Tbp } from "@/components/ui/Typography";
+import { ContactValue } from "@/components/ui/ContactValue";
 
 function Col({ title, links }: { title: string; links: { label: string; href: string }[] }) {
   return (
@@ -38,8 +38,8 @@ export function Footer() {
               {company.address.city}, {company.address.state}-{company.address.postalCode}
             </address>
             <ul className="mt-6 space-y-1.5 text-[0.9375rem] text-ivory/90">
-              <li><Tbp>{company.contact.phone}</Tbp></li>
-              <li><Tbp>{company.contact.email}</Tbp></li>
+              <li><ContactValue text={company.contact.phone} href={company.contact.phoneHref} className="link-underline hover:text-ivory" /></li>
+              <li><ContactValue text={company.contact.email} href={company.contact.emailHref} className="link-underline break-all hover:text-ivory" /></li>
             </ul>
           </div>
 

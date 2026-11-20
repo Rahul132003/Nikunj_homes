@@ -1,6 +1,7 @@
 import { company } from "@/data/company";
 import { LinkButton } from "@/components/ui/Button";
-import { Eyebrow, Heading, Tbp } from "@/components/ui/Typography";
+import { ContactValue } from "@/components/ui/ContactValue";
+import { Eyebrow, Heading } from "@/components/ui/Typography";
 import { Reveal } from "@/components/motion/Reveal";
 
 export const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(company.address.full)}`;
@@ -29,14 +30,14 @@ export function OfficeBand() {
 
         <Reveal delay={0.2} className="lg:col-span-5">
           <dl className="grid gap-px border border-hairline bg-hairline text-small">
-            {[
-              ["Phone", company.contact.phone],
-              ["Email", company.contact.email],
-              ["Hours", company.contact.hours],
-            ].map(([k, v]) => (
+            {([
+              ["Phone", company.contact.phone, company.contact.phoneHref],
+              ["Email", company.contact.email, company.contact.emailHref],
+              ["Hours", company.contact.hours, null],
+            ] as const).map(([k, v, href]) => (
               <div key={k} className="grid grid-cols-[6rem_1fr] gap-4 bg-ivory px-6 py-5">
                 <dt className="text-eyebrow text-bronze">{k}</dt>
-                <dd><Tbp>{v}</Tbp></dd>
+                <dd className="break-words"><ContactValue text={v} href={href} /></dd>
               </div>
             ))}
           </dl>

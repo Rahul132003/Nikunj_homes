@@ -29,7 +29,7 @@ export function LocationSection() {
         <div className="mt-14 grid gap-10 lg:grid-cols-12 lg:gap-14">
           <Reveal className="lg:col-span-7">
             <figure>
-              <div className="relative aspect-[1646/1501] max-h-[44rem] w-full overflow-hidden bg-pgs-wash">
+              <div className="relative max-h-[44rem] w-full overflow-hidden bg-pgs-wash" style={{ aspectRatio: `${f.locationMap.width} / ${f.locationMap.height}` }}>
                 <Image src={f.locationMap.src} alt={f.locationMap.alt} fill sizes="(min-width:1024px) 58vw, 100vw" className="object-contain" />
               </div>
               <figcaption className="mt-3 text-small text-muted">{f.locationAttribution}</figcaption>
@@ -52,19 +52,25 @@ export function LocationSection() {
                         {h.status === "proposed" && <span className="mr-2 rounded-[2px] border border-dashed border-pgs-green px-1.5 py-0.5 text-[0.6875rem] font-bold uppercase tracking-wider text-pgs-green">Proposed</span>}
                         {h.place}
                       </p>
-                      <p className="shrink-0 font-display text-[1.625rem] leading-none text-forest-900">
-                        {h.minutes}<span className="ml-1 font-sans text-small text-muted">min{h.mode === "drive" ? " drive" : ""}</span>
-                      </p>
+                      {h.minutes === null ? (
+                        <p className="shrink-0 text-small font-semibold text-forest-900">Walking distance</p>
+                      ) : (
+                        <p className="shrink-0 font-display text-[1.625rem] leading-none text-forest-900">
+                          {h.minutes}<span className="ml-1 font-sans text-small text-muted">min{h.mode === "drive" ? " drive" : ""}</span>
+                        </p>
+                      )}
                     </div>
-                    <div aria-hidden className="mt-3 h-1 bg-forest-900/10">
-                      <motion.div
-                        className="h-full origin-left bg-pgs-olive"
-                        initial={{ scaleX: reduce ? h.minutes / MAX : 0 }}
-                        whileInView={{ scaleX: h.minutes / MAX }}
-                        viewport={{ once: true, amount: 1 }}
-                        transition={{ duration: 1.1, delay: 0.15 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                      />
-                    </div>
+                    {h.minutes !== null && (
+                      <div aria-hidden className="mt-3 h-1 bg-forest-900/10">
+                        <motion.div
+                          className="h-full origin-left bg-pgs-olive"
+                          initial={{ scaleX: reduce ? h.minutes / MAX : 0 }}
+                          whileInView={{ scaleX: h.minutes / MAX }}
+                          viewport={{ once: true, amount: 1 }}
+                          transition={{ duration: 1.1, delay: 0.15 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                        />
+                      </div>
+                    )}
                     <span className="sr-only">{formatDriveTime(h)}, as per developer{h.status === "proposed" ? ", proposed" : ""}</span>
                   </Reveal>
                 </li>

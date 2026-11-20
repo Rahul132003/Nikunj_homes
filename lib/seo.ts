@@ -38,7 +38,7 @@ export function buildMetadata({ title, description, path, image, noindex }: Meta
 
 /* ------------------------------------------------------------------ */
 /* Structured data — only facts the client has confirmed.              */
-/* No phone, price, rating, review, award, opening-hours or offer data. */
+/* No price, rating, review, award, opening-hours or offer data. */
 /* ------------------------------------------------------------------ */
 
 export const organizationJsonLd = {
@@ -47,6 +47,8 @@ export const organizationJsonLd = {
   name: company.name,
   description: company.description,
   url: siteUrl,
+  telephone: company.contact.phone,
+  email: company.contact.email,
   address: {
     "@type": "PostalAddress",
     streetAddress: company.address.line1,

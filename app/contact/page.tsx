@@ -6,7 +6,8 @@ import { ContactForm } from "@/components/forms/ContactForm";
 import { mapsUrl } from "@/components/home/OfficeBand";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 import { LinkButton } from "@/components/ui/Button";
-import { Eyebrow, Tbp } from "@/components/ui/Typography";
+import { ContactValue } from "@/components/ui/ContactValue";
+import { Eyebrow } from "@/components/ui/Typography";
 import { Reveal } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = buildMetadata({
@@ -36,8 +37,13 @@ export default function ContactPage() {
             </Reveal>
             <Reveal delay={0.08}>
               <dl className="divide-y divide-hairline border-y border-hairline text-[0.9375rem]">
-                {([["Phone", company.contact.phone], ["Email", company.contact.email], ["Hours", company.contact.hours], ["WhatsApp", company.whatsapp.placeholder]] as const).map(([k, v]) => (
-                  <div key={k} className="grid grid-cols-[6rem_1fr] gap-4 py-4"><dt className="text-eyebrow text-bronze">{k}</dt><dd><Tbp>{v}</Tbp></dd></div>
+                {([
+                  ["Phone", company.contact.phone, company.contact.phoneHref],
+                  ["Email", company.contact.email, company.contact.emailHref],
+                  ["Hours", company.contact.hours, null],
+                  ["WhatsApp", company.whatsapp.placeholder, null],
+                ] as const).map(([k, v, href]) => (
+                  <div key={k} className="grid grid-cols-[6rem_1fr] gap-4 py-4"><dt className="text-eyebrow text-bronze">{k}</dt><dd className="break-words"><ContactValue text={v} href={href} /></dd></div>
                 ))}
               </dl>
             </Reveal>

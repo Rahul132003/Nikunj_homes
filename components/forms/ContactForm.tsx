@@ -1,10 +1,10 @@
-﻿"use client";
+"use client";
 
 import { ConsentField, FormDisclaimer, Honeypot, SelectField, SubmitRow, SuccessPanel, TextAreaField, TextField, useEnquiryForm } from "./FormKit";
 
 export function ContactForm() {
   const f = useEnquiryForm("contact", { name: "", phone: "", email: "", subject: "", message: "" });
-  if (f.status === "success") return <SuccessPanel result={f.result} onReset={f.reset} title="Thank you â€” weâ€™ll be in touch." />;
+  if (f.status === "success") return <SuccessPanel result={f.result} onReset={f.reset} title="Thank you — we’ll be in touch." />;
 
   return (
     <form ref={f.formRef} onSubmit={f.onSubmit} noValidate className="relative space-y-6" aria-label="Contact Nikunj Homes">

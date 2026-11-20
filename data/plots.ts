@@ -39,7 +39,7 @@ export interface PlotDetails {
 
 export const PLOT_PLACEHOLDERS: PlotDetails = {
   size: "[Size – to be provided]",
-  price: "[Price – to be provided]",
+  price: "Price on request",
   status: "[Availability – to be provided]",
 };
 
