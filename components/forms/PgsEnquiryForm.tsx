@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect } from "react";
 import { ConsentField, FormDisclaimer, Honeypot, SelectField, SubmitRow, SuccessPanel, TextAreaField, TextField, useEnquiryForm } from "./FormKit";
@@ -37,14 +37,14 @@ export function PgsEnquiryForm({ sectionId = "enquire" }: { sectionId?: string }
       <TextField label="Email" type="email" inputMode="email" autoComplete="email" bound={f.bind("email")} />
       <div className="grid gap-6 sm:grid-cols-2">
         <TextField label="Plot of interest" hint="Select one on the layout plan, or type a number" placeholder="e.g. 17 or 43A" bound={f.bind("plot")} />
-        <SelectField label="I’d like to know about" required options={["Site visit", "Plot details", "Pricing", "Something else"]} bound={f.bind("interest")} />
+        <SelectField label="Iâ€™d like to know about" required options={["Site visit", "Plot details", "Pricing", "Something else"]} bound={f.bind("interest")} />
       </div>
       <TextAreaField label="Message" rows={4} bound={f.bind("message")} />
       <ConsentField checked={f.values.consent === true} onChange={(v) => f.set("consent", v)} error={f.submitted && f.values.consent !== true ? "Please confirm so we can respond to your enquiry" : undefined}>
         I agree to Nikunj Homes contacting me about PGS GREENS.
       </ConsentField>
       <FormDisclaimer />
-      <SubmitRow status={f.status} label="Send enquiry" />
+      <SubmitRow status={f.status} error={f.result?.error} label="Send enquiry" />
     </form>
   );
 }

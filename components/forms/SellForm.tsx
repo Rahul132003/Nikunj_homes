@@ -1,11 +1,11 @@
-"use client";
+﻿"use client";
 
 import { categoryOptions } from "@/lib/validation";
 import { ConsentField, FormDisclaimer, Honeypot, SelectField, SubmitRow, SuccessPanel, TextAreaField, TextField, useEnquiryForm } from "./FormKit";
 
 export function SellForm() {
   const f = useEnquiryForm("sell", { name: "", phone: "", email: "", category: "", location: "", size: "", expectedPrice: "", message: "" });
-  if (f.status === "success") return <SuccessPanel result={f.result} onReset={f.reset} title="Thank you — we have your property details." />;
+  if (f.status === "success") return <SuccessPanel result={f.result} onReset={f.reset} title="Thank you â€” we have your property details." />;
 
   return (
     <form ref={f.formRef} onSubmit={f.onSubmit} noValidate className="relative space-y-6" aria-label="Sell your property enquiry">
@@ -28,7 +28,7 @@ export function SellForm() {
         I agree to Nikunj Homes contacting me about this enquiry.
       </ConsentField>
       <FormDisclaimer variant="general" />
-      <SubmitRow status={f.status} label="Submit property details" />
+      <SubmitRow status={f.status} error={f.result?.error} label="Submit property details" />
     </form>
   );
 }

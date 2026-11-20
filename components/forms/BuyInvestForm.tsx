@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { categoryOptions } from "@/lib/validation";
 import { ConsentField, FormDisclaimer, Honeypot, SelectField, SubmitRow, SuccessPanel, TextAreaField, TextField, useEnquiryForm } from "./FormKit";
@@ -23,13 +23,13 @@ export function BuyInvestForm() {
         <TextField label="Budget" hint="A range is fine" bound={f.bind("budget")} />
         <TextField label="Preferred location" placeholder="Area / city" bound={f.bind("location")} />
       </div>
-      <SelectField label="Timeline" options={["Immediately", "Within 3 months", "3–6 months", "Just exploring"]} bound={f.bind("timeline")} />
-      <TextAreaField label="Tell us what you’re looking for" rows={4} bound={f.bind("message")} />
+      <SelectField label="Timeline" options={["Immediately", "Within 3 months", "3â€“6 months", "Just exploring"]} bound={f.bind("timeline")} />
+      <TextAreaField label="Tell us what youâ€™re looking for" rows={4} bound={f.bind("message")} />
       <ConsentField checked={f.values.consent === true} onChange={(v) => f.set("consent", v)} error={f.submitted && f.values.consent !== true ? "Please confirm so we can respond to your enquiry" : undefined}>
         I agree to Nikunj Homes contacting me about this enquiry.
       </ConsentField>
       <FormDisclaimer />
-      <SubmitRow status={f.status} />
+      <SubmitRow status={f.status} error={f.result?.error} />
     </form>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useId, useRef, useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
+import Link from "next/link";
+import { useCallback, useEffect, useId, useRef, useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
 import { submitEnquiry, type SubmitResult } from "@/lib/submit";
 import { schemas, type EnquiryKind } from "@/lib/validation";
@@ -231,31 +232,67 @@ export function FormDisclaimer({ variant = "developer", className }: { variant?:
   );
 }
 
-export function SubmitRow({ status, label = "Send enquiry" }: { status: Status; label?: string }) {
+export function SubmitRow({ status, label = "Send enquiry", error }: { status: Status; label?: string; error?: string }) {
   return (
     <div className="flex flex-col gap-4">
       <Button type="submit" size="lg" arrow disabled={status === "submitting"} aria-busy={status === "submitting"} className="w-full sm:w-auto">
         {status === "submitting" ? "Sending…" : label}
       </Button>
-      <div aria-live="polite" className="min-h-5 text-small font-medium text-error">
-        {status === "error" && "We couldn’t send your enquiry. Please try again."}
+      <div aria-live="polite" className="min-h-5">
+        {status === "error" && (
+          <p role="alert" className="flex items-start gap-2 border-l-2 border-error bg-ivory-200 px-4 py-3 text-small font-medium text-error">
+            <svg aria-hidden viewBox="0 0 16 16" className="mt-1 h-3.5 w-3.5 shrink-0" fill="currentColor"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1Zm-.75 3.5h1.5v4.5h-1.5V4.5Zm0 6h1.5V12h-1.5v-1.5Z" /></svg>
+            {error || "We couldn’t send your enquiry. Please try again."}
+          </p>
+        )}
       </div>
     </div>
   );
 }
 
 export function SuccessPanel({ result, onReset, title = "Thank you — your enquiry is in." }: { result: SubmitResult | null; onReset: () => void; title?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  // The form just unmounted, so move focus here: keyboard and screen-reader users land on the confirmation.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.focus({ preventScroll: true });
+    el.scrollIntoView({ block: "center", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  }, []);
+
   return (
-    <div role="status" className="border border-forest-700/30 bg-white p-8 sm:p-10">
-      <svg aria-hidden viewBox="0 0 40 40" className="h-10 w-10 text-forest-700" fill="none" stroke="currentColor" strokeWidth="1.4"><circle cx="20" cy="20" r="18" /><path d="M12 20.5l5.5 5.5L28 14.5" /></svg>
-      <h3 className="text-h3 mt-5 text-forest-900">{title}</h3>
-      {result?.reference && <p className="mt-3 text-small text-muted">Reference: <span className="font-semibold text-charcoal">{result.reference}</span></p>}
+    <div ref={ref} role="status" tabIndex={-1} className="outline-none">
+      <div className="flex items-center gap-4">
+        <span aria-hidden className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-gold-400 text-forest-950">
+          <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+        </span>
+        <span className="text-eyebrow text-label">Enquiry received</span>
+      </div>
+
+      <h3 className="text-h3 mt-7 text-forest-900 text-balance">{title}</h3>
+      <p className="mt-4 max-w-md text-muted">
+        A member of the Nikunj Homes team will get back to you using the details you shared.
+      </p>
+
+      {result?.reference && (
+        <dl className="mt-8 inline-grid gap-1 border-l-2 border-gold-500 bg-ivory-200 py-3 pl-5 pr-8">
+          <dt className="text-small text-muted">Your reference</dt>
+          <dd className="font-display text-[1.375rem] tracking-wide text-forest-900">{result.reference}</dd>
+        </dl>
+      )}
+      {result?.reference && <p className="mt-3 text-small text-muted">Quote this reference if you contact us about this enquiry.</p>}
+      {result?.confirmationSent && <p className="mt-3 text-small text-muted">A short confirmation has been sent to your email.</p>}
+
       {result?.mock && (
-        <p className="mt-5 border-l-2 border-bronze bg-ivory-200 px-4 py-3 text-small text-charcoal">
+        <p className="mt-6 border-l-2 border-bronze bg-ivory-200 px-4 py-3 text-small text-charcoal">
           <strong>Demo mode:</strong> this enquiry was validated but <strong>not sent</strong>. Email / CRM delivery has not been connected yet.
         </p>
       )}
-      <button type="button" onClick={onReset} className="link-underline mt-7 text-small font-semibold text-forest-900">Send another enquiry</button>
+
+      <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-hairline pt-7">
+        <Link href="/" className="link-underline text-small font-semibold text-forest-900">Back to home</Link>
+        <button type="button" onClick={onReset} className="link-underline text-small font-semibold text-forest-900">Send another enquiry</button>
+      </div>
     </div>
   );
 }
